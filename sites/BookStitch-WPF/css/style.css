@@ -808,7 +808,7 @@ main{background:transparent !important;}
   inset: 0 !important;
   z-index: 0 !important;
   background-color: #041419 !important;
-  background-image: url('../assets/library-center-v38-double.webp') !important;
+  background-image: url('../assets/library-center-v40-cosmic.webp') !important;
   background-position: center top !important;
   background-repeat: repeat-y !important;
   background-size: max(100%, 1800px) auto !important;
@@ -1791,3 +1791,78 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline img{display:block;w
   background:linear-gradient(145deg,rgba(24,87,91,.92),rgba(9,40,46,.98));
 }
 .book-panel-columns .book-sample-shortcut:focus-visible {outline:1px solid #7cd5d5;outline-offset:3px;}
+
+
+/* V28 — calmer full-width center backdrop and updated navigation wordmark. */
+.library-edge{display:none !important;}
+.library-stage-center{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  background-color:#041419 !important;
+  background-image:url('../assets/library-center-v40-cosmic.webp') !important;
+  background-position:center top !important;
+  background-repeat:repeat-y !important;
+  background-size:max(100%, 1800px) auto !important;
+  pointer-events:none !important;
+}
+.site-header .brand-logo{width:clamp(210px,17vw,300px);height:auto;max-height:none;object-fit:contain;}
+@media (max-width:1090px){
+  .site-header .brand-logo{width:200px;}
+}
+@media (max-width:790px){
+  .site-header .brand-logo{width:185px;}
+}
+@media (max-width:460px){
+  .site-header .brand-logo{width:165px;}
+}
+
+/* V30 — consistent spacing around the Swiss cross. */
+body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;margin-right:6px;}
+
+
+/* Website V2.1 — centered version label between imprint and license. */
+.site-footer .footer-inner {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:20px;
+}
+.site-footer .page-version {
+  grid-column:2;
+  justify-self:center;
+  white-space:nowrap;
+  color:#95acae;
+}
+.site-footer .footer-right {
+  grid-column:3;
+  justify-self:end;
+  text-align:right;
+}
+@media(max-width:790px){
+  .site-footer .footer-inner{grid-template-columns:1fr;gap:10px;text-align:center;}
+  .site-footer .footer-imprint-trigger,
+  .site-footer .page-version,
+  .site-footer .footer-right{grid-column:1;justify-self:center;text-align:center;}
+}
+
+/* V2.3 — centered gramophone invitation in the Antique Projector details. */
+#book-dialog[data-detail-trigger="open-antique-projector"] .player-samples-callout {
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:7px;text-align:center;margin:30px auto 10px;padding:8px 0;
+  width:100%;max-width:100%;
+}
+#book-dialog[data-detail-trigger="open-antique-projector"] .player-samples-callout img {
+  display:block;width:112px;height:112px;max-width:38%;object-fit:contain;
+}
+#book-dialog[data-detail-trigger="open-antique-projector"] .player-samples-callout .player-samples-link {
+  display:inline-block;margin:0;color:#7ad2d5;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(20px,2.1vw,24px);font-style:italic;font-weight:500;
+  letter-spacing:.015em;line-height:1.25;
+  text-decoration:none;
+}
+#book-dialog[data-detail-trigger="open-antique-projector"] .player-samples-callout .player-samples-link:hover,
+#book-dialog[data-detail-trigger="open-antique-projector"] .player-samples-callout .player-samples-link:focus-visible {
+  color:#d4f7f3;text-decoration:underline;text-underline-offset:4px;
+}

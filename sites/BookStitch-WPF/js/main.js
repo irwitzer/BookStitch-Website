@@ -172,8 +172,7 @@ markActiveSection(window.location.hash || '#home');
       // The link uses the same deep-link handler as an external #download-samples URL.
       const sampleLinkColumn = {
         'open-chapter-book': 0,
-        'open-metadata-book': 1,
-        'open-export-book': 0
+        'open-metadata-book': 1
       };
       if (sampleLinkColumn[triggerId] === index) {
         const sampleLink = document.createElement('a');
@@ -218,11 +217,20 @@ markActiveSection(window.location.hash || '#home');
       }
     });
     if (triggerId === 'open-antique-projector') {
+      const sampleCallout = document.createElement('div');
+      sampleCallout.className = 'player-samples-callout';
+      const gramophone = document.createElement('img');
+      gramophone.src = 'assets/gramophone-compatibility-v72.webp';
+      gramophone.alt = '';
+      gramophone.width = 112;
+      gramophone.height = 112;
+      gramophone.decoding = 'async';
       const link = document.createElement('a');
       link.href = '#download-samples';
       link.className = 'player-samples-link';
       link.textContent = 'Download Samples';
-      columnSections[1].appendChild(link);
+      sampleCallout.append(gramophone, link);
+      columnSections[1].appendChild(sampleCallout);
     }
     if (triggerId === 'open-shadow-projector') {
       columnSections.forEach((section, index) => {
