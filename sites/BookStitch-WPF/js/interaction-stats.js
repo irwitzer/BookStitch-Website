@@ -5,7 +5,7 @@
     enabled: true,
     endpoint: "https://bookstitch-events.irwitzer.workers.dev/v1/event"
   });
-  if (!CONFIG.enabled || !/^https:\/\/[a-z0-9.-]+\/v1\/event$/i.test(CONFIG.endpoint)
+  if (window.BookStitchStatsEnabled !== true || !CONFIG.enabled || !/^https:\/\/[a-z0-9.-]+\/v1\/event$/i.test(CONFIG.endpoint)
       || CONFIG.endpoint.includes("REPLACE-WITH-YOUR-WORKER")) return;
 
   function track(id) {
