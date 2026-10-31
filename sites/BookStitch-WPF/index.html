@@ -36,6 +36,8 @@
       }
     })();
   </script>
+  <!-- Preload the responsive hero (LCP) before styles and deferred scripts. -->
+  <link rel="preload" as="image" href="assets/hero-main-emblem-opt-960.webp" imagesrcset="assets/hero-main-emblem-opt-480.webp 480w, assets/hero-main-emblem-opt-960.webp 960w, assets/hero-main-emblem-opt-1280.webp 1280w" imagesizes="(min-width: 2200px) 660px, (max-width: 460px) 96vw, (max-width: 790px) 88vw, (max-width: 1090px) 53vw, clamp(420px, 35vw, 620px)" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
   <script src="js/interaction-stats.js" defer></script>
@@ -48,7 +50,7 @@
   <a class="skip-link" href="#main" data-stat-event="nav.skip-content">Skip to content</a>
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="BookStitch home" data-stat-event="nav.brand-home"><img class="brand-logo" src="assets/wordmark-navigation-v225.webp" alt="BookStitch" width="1024" height="341"></a>
+      <a class="brand" href="#home" aria-label="BookStitch home" data-stat-event="nav.brand-home"><img class="brand-logo" src="assets/wordmark-navigation-v225-opt-400.webp" srcset="assets/wordmark-navigation-v225-opt-400.webp 400w, assets/wordmark-navigation-v225-opt-800.webp 800w" sizes="(max-width: 790px) 200px, 230px" alt="BookStitch" width="1024" height="341"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-links" aria-label="Toggle navigation" data-stat-event="nav.menu-open" data-stat-open-only="true">☰</button>
       <div class="nav-links" id="site-links">
         <a href="#home" class="active" data-stat-event="nav.home"><span>Home</span></a><a href="#workflow" data-stat-event="nav.workflow"><span>Workflow</span></a><a href="#features" data-stat-event="nav.features"><span>Features</span></a><a href="#magic" data-stat-event="nav.magic"><span>Magic</span></a><a href="#magic-lantern" data-stat-event="nav.gallery"><span>Gallery</span></a><a href="#open-source" data-stat-event="nav.open-source"><span>Open Source</span></a>
@@ -62,27 +64,27 @@
       <div class="hero-background" aria-hidden="true"></div>
       <div class="wrap hero-content">
         <div class="hero-copy">
-          <h1 id="hero-title" class="hero-logo-title"><img class="hero-logo" src="assets/wordmark-hero-gold-v60.webp" alt="BookStitch" width="2048" height="682"></h1>
+          <h1 id="hero-title" class="hero-logo-title"><img class="hero-logo" src="assets/wordmark-hero-gold-v60-opt-640.webp" srcset="assets/wordmark-hero-gold-v60-opt-640.webp 640w, assets/wordmark-hero-gold-v60-opt-1280.webp 1280w" sizes="(max-width: 790px) calc(100vw - 34px), 560px" alt="BookStitch" width="2048" height="682"></h1>
           <p class="lead">Audiobook Creation, Simplified.</p>
           <p class="intro">Import audio, edit metadata, create chapters, and export ready-to-listen audiobooks — A calm workspace for your stories.</p>
           <div class="hero-buttons"><a class="button button-primary button-download-hero" href="https://apps.microsoft.com/detail/9P9MH8WL8KGP" target="_blank" rel="noopener noreferrer" data-stat-event="hero.download-windows"><span class="button-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v8.59l2.3-2.29a1 1 0 1 1 1.4 1.41l-4 3.99a1 1 0 0 1-1.4 0l-4-3.99a1 1 0 1 1 1.4-1.41L11 11.59V3a1 1 0 0 1 1-1Zm-7 13a1 1 0 0 1 1 1v2h12v-2a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z"/></svg></span><span>Download for Windows</span><span class="button-arrow" aria-hidden="true">→</span></a><a class="button button-outline button-github-hero" href="https://github.com/irwitzer/BookStitch/releases/latest" target="_blank" rel="noopener noreferrer" data-stat-event="hero.release-github"><span class="button-icon button-icon-github" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.56 0-.27-.01-1.18-.02-2.14-3.2.69-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.2 11.2 0 0 1 5.82 0c2.22-1.49 3.19-1.18 3.19-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.4-5.25 5.68.42.36.79 1.07.79 2.16 0 1.56-.01 2.81-.01 3.19 0 .31.2.67.79.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></span><span>Release on GitHub</span></a></div>
           <div class="trust trust-v67" aria-label="BookStitch benefits">
- <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="open-source-trigger" aria-expanded="false" aria-controls="open-source-popover" data-stat-event="hero.open-source" data-stat-open-only="true"><img src="assets/trust-leaf-v225.webp" alt="" width="38" height="38"><span>Open Source</span></button><span class="trust-popover" id="open-source-popover" hidden role="region" aria-label="Open source information"><strong>Free &amp; Open Source</strong><span>BookStitch is free and open-source software licensed under the GNU GPL v3.0-only. Everyone can inspect the source code, modify it, and redistribute it under the license terms.</span></span></span>
- <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="language-trigger" aria-expanded="false" aria-controls="language-popover" data-stat-event="hero.languages" data-stat-open-only="true"><img src="assets/trust-languages-v225.webp" alt="" width="38" height="38"><span>20 Languages</span></button><span class="trust-popover trust-language-popover" id="language-popover" hidden role="region" aria-label="Available interface languages"><strong>Interface Languages</strong><p class="language-flow-v68">German <span aria-hidden="true">·</span> English <span aria-hidden="true">·</span> Spanish <span aria-hidden="true">·</span> French <span aria-hidden="true">·</span> Italian <span aria-hidden="true">·</span> Portuguese (Brazil) <span aria-hidden="true">·</span> Dutch <span aria-hidden="true">·</span> Swedish <span aria-hidden="true">·</span> Norwegian (Bokmål) <span aria-hidden="true">·</span> Danish <span aria-hidden="true">·</span> Finnish <span aria-hidden="true">·</span> Polish <span aria-hidden="true">·</span> Czech <span aria-hidden="true">·</span> Русский <span aria-hidden="true">·</span> Türkçe <span aria-hidden="true">·</span> Tiếng Việt <span aria-hidden="true">·</span> বাংলা (বাংলাদেশ) <span aria-hidden="true">·</span> 日本語 <span aria-hidden="true">·</span> 简体中文（中国大陆） <span aria-hidden="true">·</span> 繁體中文（香港）</p><small>20 Languages <span class="swiss-cross-inline" aria-hidden="true"><img src="assets/swiss-cross-v80.webp" alt="" width="14" height="14"></span> Bärndütsch.</small></span></span>
- <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="privacy-trigger" aria-expanded="false" aria-controls="privacy-popover" data-stat-event="hero.zero-bullshit" data-stat-open-only="true"><img src="assets/trust-heart-v225.webp" alt="" width="38" height="38"><span>Zero Bullshit</span></button><span class="trust-popover" id="privacy-popover" hidden role="region" aria-label="Privacy information"><strong>Privacy by Design</strong><span>No Account, No Sign-In, No Advertising, No Tracking, No Telemetry, No Subscription, No Bullshit!</span></span></span>
+ <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="open-source-trigger" aria-expanded="false" aria-controls="open-source-popover" data-stat-event="hero.open-source" data-stat-open-only="true"><img src="assets/trust-leaf-v225-opt-76.webp" srcset="assets/trust-leaf-v225-opt-76.webp 76w" sizes="38px" alt="" width="38" height="38"><span>Open Source</span></button><span class="trust-popover" id="open-source-popover" hidden role="region" aria-label="Open source information"><strong>Free &amp; Open Source</strong><span>BookStitch is free and open-source software licensed under the GNU GPL v3.0-only. Everyone can inspect the source code, modify it, and redistribute it under the license terms.</span></span></span>
+ <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="language-trigger" aria-expanded="false" aria-controls="language-popover" data-stat-event="hero.languages" data-stat-open-only="true"><img src="assets/trust-languages-v225-opt-76.webp" srcset="assets/trust-languages-v225-opt-76.webp 76w" sizes="38px" alt="" width="38" height="38"><span>20 Languages</span></button><span class="trust-popover trust-language-popover" id="language-popover" hidden role="region" aria-label="Available interface languages"><strong>Interface Languages</strong><p class="language-flow-v68">German <span aria-hidden="true">·</span> English <span aria-hidden="true">·</span> Spanish <span aria-hidden="true">·</span> French <span aria-hidden="true">·</span> Italian <span aria-hidden="true">·</span> Portuguese (Brazil) <span aria-hidden="true">·</span> Dutch <span aria-hidden="true">·</span> Swedish <span aria-hidden="true">·</span> Norwegian (Bokmål) <span aria-hidden="true">·</span> Danish <span aria-hidden="true">·</span> Finnish <span aria-hidden="true">·</span> Polish <span aria-hidden="true">·</span> Czech <span aria-hidden="true">·</span> Русский <span aria-hidden="true">·</span> Türkçe <span aria-hidden="true">·</span> Tiếng Việt <span aria-hidden="true">·</span> বাংলা (বাংলাদেশ) <span aria-hidden="true">·</span> 日本語 <span aria-hidden="true">·</span> 简体中文（中国大陆） <span aria-hidden="true">·</span> 繁體中文（香港）</p><small>20 Languages <span class="swiss-cross-inline" aria-hidden="true"><img src="assets/swiss-cross-v80.webp" alt="" width="14" height="14"></span> Bärndütsch.</small></span></span>
+ <span class="trust-item trust-info"><button type="button" class="trust-trigger" id="privacy-trigger" aria-expanded="false" aria-controls="privacy-popover" data-stat-event="hero.zero-bullshit" data-stat-open-only="true"><img src="assets/trust-heart-v225-opt-76.webp" srcset="assets/trust-heart-v225-opt-76.webp 76w" sizes="38px" alt="" width="38" height="38"><span>Zero Bullshit</span></button><span class="trust-popover" id="privacy-popover" hidden role="region" aria-label="Privacy information"><strong>Privacy by Design</strong><span>No Account, No Sign-In, No Advertising, No Tracking, No Telemetry, No Subscription, No Bullshit!</span></span></span>
 </div>
         </div>
-        <div class="hero-crest" aria-hidden="true"><img src="assets/hero-main-emblem.webp" alt="" decoding="async" fetchpriority="high"></div>
+        <div class="hero-crest" aria-hidden="true"><img width="1448" height="1086" src="assets/hero-main-emblem-opt-960.webp" srcset="assets/hero-main-emblem-opt-480.webp 480w, assets/hero-main-emblem-opt-960.webp 960w, assets/hero-main-emblem-opt-1280.webp 1280w" sizes="(min-width: 2200px) 660px, (max-width: 460px) 96vw, (max-width: 790px) 88vw, (max-width: 1090px) 53vw, clamp(420px, 35vw, 620px)" alt="" decoding="async" loading="eager" fetchpriority="high"></div>
       </div>
       <div class="hero-bottom-line ornamental-divider" aria-hidden="true"><img src="assets/divider-hero-features-v13.webp" alt="" decoding="async"></div>
     </section>
     <section class="section features" id="workflow" aria-labelledby="workflow-title">
       <div class="wrap"><div class="section-heading"><div class="ornament">◆</div><h2 id="workflow-title">What BookStitch Does</h2><p>Turn your audio collection into a complete, beautifully organized audiobook.</p></div>
         <div class="feature-grid">
-          <article class="feature"><div class="feature-icon"><img src="assets/feature-import-v225.webp" alt="" loading="lazy" width="96" height="96"></div><h3>Import</h3><p>Import audio tracks from local folders, MP3 CDs, or audio CDs.</p></article>
-          <article class="feature"><div class="feature-icon"><img src="assets/feature-organize-v225.webp" alt="" loading="lazy" width="96" height="96"></div><h3>Organize</h3><p>Review and edit metadata, create and manage chapters.</p></article>
-          <article class="feature"><div class="feature-icon"><img src="assets/feature-merge-v225.webp" alt="" loading="lazy" width="96" height="96"></div><h3>Merge &amp; Export</h3><p>Combine your tracks into a single audiobook and export it as M4A or M4B.</p></article>
-          <article class="feature"><div class="feature-icon"><img src="assets/feature-control-v225.webp" alt="" loading="lazy" width="96" height="96"></div><h3>Ready to Listen</h3><p>Enjoy your finished audiobook in your favorite player.</p></article>
+          <article class="feature"><div class="feature-icon"><img src="assets/feature-import-v225-opt-192.webp" srcset="assets/feature-import-v225-opt-96.webp 96w, assets/feature-import-v225-opt-192.webp 192w" sizes="96px" alt="" loading="lazy" width="96" height="96"></div><h3>Import</h3><p>Import audio tracks from local folders, MP3 CDs, or audio CDs.</p></article>
+          <article class="feature"><div class="feature-icon"><img src="assets/feature-organize-v225-opt-192.webp" srcset="assets/feature-organize-v225-opt-96.webp 96w, assets/feature-organize-v225-opt-192.webp 192w" sizes="96px" alt="" loading="lazy" width="96" height="96"></div><h3>Organize</h3><p>Review and edit metadata, create and manage chapters.</p></article>
+          <article class="feature"><div class="feature-icon"><img src="assets/feature-merge-v225-opt-192.webp" srcset="assets/feature-merge-v225-opt-96.webp 96w, assets/feature-merge-v225-opt-192.webp 192w" sizes="96px" alt="" loading="lazy" width="96" height="96"></div><h3>Merge &amp; Export</h3><p>Combine your tracks into a single audiobook and export it as M4A or M4B.</p></article>
+          <article class="feature"><div class="feature-icon"><img src="assets/feature-control-v225-opt-192.webp" srcset="assets/feature-control-v225-opt-96.webp 96w, assets/feature-control-v225-opt-192.webp 192w" sizes="96px" alt="" loading="lazy" width="96" height="96"></div><h3>Ready to Listen</h3><p>Enjoy your finished audiobook in your favorite player.</p></article>
         </div>
       </div>
     </section>
@@ -90,35 +92,35 @@
     <section class="section workflow" id="features" aria-labelledby="features-title"><div class="wrap"><div class="section-heading"><div class="ornament">◆</div><h2 id="features-title">Features</h2><p>Powerful features, thoughtfully designed to make audiobook creation effortless.</p><p class="section-heading-detail">Tap or click a book to explore its features.</p></div>
       <ol class="steps">
 <li><button type="button" class="book-trigger" id="open-formats-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Formats" data-stat-event="book.formats">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-01.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-01-opt-256.webp" srcset="assets/feature-book-01-opt-256.webp 256w, assets/feature-book-01-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Formats</span><span class="book-trigger-desc">From audio files to CDs, bring your sources together.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-chapter-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Chapter" data-stat-event="book.chapter">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-02.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-02-opt-256.webp" srcset="assets/feature-book-02-opt-256.webp 256w, assets/feature-book-02-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Chapter</span><span class="book-trigger-desc">Shape clear chapters for a better listening experience.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-metadata-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Metadata and Cover Art" data-stat-event="book.metadata-cover">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-03.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-03-opt-256.webp" srcset="assets/feature-book-03-opt-256.webp 256w, assets/feature-book-03-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Metadata &amp; Cover Art</span><span class="book-trigger-desc">Give your audiobook the details and artwork it deserves.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-tracks-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Smart Track Management" data-stat-event="book.smart-track-management">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-04.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-04-opt-256.webp" srcset="assets/feature-book-04-opt-256.webp 256w, assets/feature-book-04-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Smart Track Management</span><span class="book-trigger-desc">Keep your tracks organized, reviewed, and under control.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-passthrough-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Pass Through" data-stat-event="book.pass-through">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-05.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-05-opt-256.webp" srcset="assets/feature-book-05-opt-256.webp 256w, assets/feature-book-05-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Pass Through</span><span class="book-trigger-desc">Preserve compatible audio without unnecessary re-encoding.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-drive-circle-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Drive Circle" data-stat-event="book.drive-circle">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-06.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-06-opt-256.webp" srcset="assets/feature-book-06-opt-256.webp 256w, assets/feature-book-06-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Drive Circle</span><span class="book-trigger-desc">Keep multi-disc imports organized from drive to drive.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-project-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore Project" data-stat-event="book.project">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-07.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-07-opt-256.webp" srcset="assets/feature-book-07-opt-256.webp 256w, assets/feature-book-07-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">Project</span><span class="book-trigger-desc">Keep your projects ready to revisit, refine, and re-export.</span></span>
 </button></li>
 <li><button type="button" class="book-trigger" id="open-export-book" aria-haspopup="dialog" aria-controls="book-dialog" aria-label="Explore M4A and M4B Export" data-stat-event="book.m4a-m4b-export">
-<span class="step-icon step-icon-book"><img src="assets/feature-book-08.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
+<span class="step-icon step-icon-book"><img src="assets/feature-book-08-opt-256.webp" srcset="assets/feature-book-08-opt-256.webp 256w, assets/feature-book-08-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="512" height="512" loading="lazy" decoding="async"></span>
 <span class="book-trigger-copy"><span class="book-trigger-title">M4A &amp; M4B Export</span><span class="book-trigger-desc">Export your finished audiobook in the format you need.</span></span>
 </button></li>
 </ol>
@@ -136,7 +138,7 @@
           <span class="lantern-invite-title">Magic Lantern</span>
           <span class="lantern-invite-desc">BookStitch Gallery</span>
         </span>
-        <span class="lantern-visual"><img src="assets/lantern-magic-v56.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async"></span>
+        <span class="lantern-visual"><img src="assets/lantern-magic-v56-opt-480.webp" srcset="assets/lantern-magic-v56-opt-480.webp 480w, assets/lantern-magic-v56-opt-960.webp 960w" sizes="(max-width: 700px) 85vw, 340px" alt="" width="1254" height="1254" loading="lazy" decoding="async"></span>
         <span class="lantern-invite"><span class="lantern-invite-action">Click to reveal <span aria-hidden="true">✦</span></span></span>
       </button>
 
@@ -145,7 +147,7 @@
           <span class="lantern-invite-title">Antique Projector</span>
           <span class="lantern-invite-desc">Player Compatibility</span>
         </span>
-        <span class="lantern-visual"><img src="assets/lantern-projector-v51.webp" alt="" width="1312" height="1199" loading="lazy" decoding="async"></span>
+        <span class="lantern-visual"><img src="assets/lantern-projector-v51-opt-480.webp" srcset="assets/lantern-projector-v51-opt-480.webp 480w, assets/lantern-projector-v51-opt-960.webp 960w" sizes="(max-width: 700px) 85vw, 340px" alt="" width="1312" height="1199" loading="lazy" decoding="async"></span>
         <span class="lantern-invite"><span class="lantern-invite-action">Click to reveal <span aria-hidden="true">✦</span></span></span>
       </button>
 
@@ -154,7 +156,7 @@
           <span class="lantern-invite-title">Shadow Lantern</span>
           <span class="lantern-invite-desc">Zero Bullshit</span>
         </span>
-        <span class="lantern-visual"><img src="assets/lantern-shadow-v51.webp" alt="" width="1143" height="1376" loading="lazy" decoding="async"></span>
+        <span class="lantern-visual"><img src="assets/lantern-shadow-v51-opt-480.webp" srcset="assets/lantern-shadow-v51-opt-480.webp 480w, assets/lantern-shadow-v51-opt-960.webp 960w" sizes="(max-width: 700px) 85vw, 340px" alt="" width="1143" height="1376" loading="lazy" decoding="async"></span>
         <span class="lantern-invite"><span class="lantern-invite-action">Click to reveal <span aria-hidden="true">✦</span></span></span>
       </button>
     </div>
@@ -251,7 +253,7 @@
     <div class="book-dialog-content book-detail-content" tabindex="-1">
       <button type="button" class="book-dialog-close" data-book-close aria-label="Close feature details">×</button>
       <div class="book-animation" aria-hidden="true">
-        <img class="book-animation-frame" src="assets/feature-book-01.webp" alt="" width="1254" height="1254" decoding="async">
+        <img class="book-animation-frame" src="assets/feature-book-01-opt-256.webp" srcset="assets/feature-book-01-opt-256.webp 256w, assets/feature-book-01-opt-384.webp 384w" sizes="(max-width: 790px) 151px, 108px" alt="" width="1254" height="1254" decoding="async">
       </div>
       <div class="book-feature-panel" aria-hidden="true">
         <div class="book-panel-scroll">
@@ -272,7 +274,7 @@
   <div id="gallery-dialog" class="gallery-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-dialog-title" aria-hidden="true" hidden>
     <div class="gallery-scrim" data-gallery-close></div>
     <div class="gallery-shell" tabindex="-1"><h2 id="gallery-dialog-title" class="gallery-sr-only">Inside BookStitch screenshot gallery</h2>
-      <div class="gallery-projector" aria-hidden="true"><img src="assets/lantern-magic-v56.webp" alt="" width="180" height="180"></div>
+      <div class="gallery-projector" aria-hidden="true"><img src="assets/lantern-magic-v56-opt-480.webp" srcset="assets/lantern-magic-v56-opt-480.webp 480w, assets/lantern-magic-v56-opt-960.webp 960w" sizes="(max-width: 700px) 85vw, 340px" alt="" width="180" height="180"></div>
       <button class="gallery-close" type="button" data-gallery-close aria-label="Close screenshot gallery">×</button>
       <div class="gallery-theatre">
         <div class="gallery-screen-frame">

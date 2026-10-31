@@ -2092,3 +2092,11 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;mar
   }
   #book-dialog.is-imprint-detail .imprint-wide-heading {margin-top:27px;padding-top:20px;}
 }
+
+/* Performance assets: size-appropriate WebP variants; original artwork retained.
+   The small mobile background prevents downloading the 1534px scene at phone widths. */
+.library-stage-center {background-image:url('../assets/library-center-v40-cosmic-opt-1534.webp') !important;}
+@media(max-width:790px) {
+  .library-stage-center {background-image:url('../assets/library-center-v40-cosmic-opt-768.webp') !important;}
+}
+.nav-links a::before {background-image:url('../assets/nav-cyan-shimmer-opt-300.webp') !important;}
