@@ -55,13 +55,13 @@ markActiveSection(window.location.hash || '#home');
       ],
       note: ''
     },
-    'open-formats-book': {"title": "Formats", "subtitle": "Choose the audio sources that fit your collection.", "sections": [{"heading": "Supported Input Formats", "blocks": [{"text": "BookStitch supports the following audio formats:"}, {"text": "MP3 · M4A · M4B · AAC · WAV · FLAC · OGG · OGA · Opus · WMA (Legacy)", "strong": true}]}, {"heading": "Supported Output Formats", "blocks": [{"text": "Export your audiobook as AAC audio in an M4A or M4B container, with flexible quality presets."}, {"label": "Output:", "text": "M4A · M4B (AAC)"}, {"label": "Presets:", "text": "64 kbps (Mono) · 96 kbps (Mono) · 96 kbps · 128 kbps · 160 kbps · 192 kbps · 256 kbps"}]}], "note": ""},
-    'open-chapter-book': {"title": "Chapter", "subtitle": "Shape clear chapters for a better listening experience.", "sections": [{"heading": "Smart Chapter Creation", "body": "Automatically detect and preserve embedded chapters, or generate chapter suggestions from track titles, tags, and file names. Seamlessly combine files with different chapter structures into one audiobook, while keeping everything in the correct order."}, {"heading": "Custom Chapter Control", "body": "Take full control of your chapters with customizable titles, flexible naming patterns, and automatic numbering. Keep existing chapters, refine suggested ones, or create your own. BookStitch precisely calculates chapter positions and timing across all tracks for a seamless listening experience."}], "note": ""},
-    'open-metadata-book': {"title": "Metadata & Cover Art", "subtitle": "Give your audiobook the details and artwork it deserves.", "sections": [{"heading": "Rich Audiobook Metadata", "body": "Keep every detail of your audiobook organized. Review and edit titles, authors, narrators, series information, publishers, languages, ISBN, ASIN, and more. Multi-value metadata fields support multiple authors, narrators, genres, and other contributors. BookStitch reads existing tags from your source files and carries your chosen metadata into the finished audiobook, keeping everything consistent and neatly organized."}, {"heading": "Cover Art Integration", "body": "Give your audiobook the perfect finishing touch. Import cover images in JPEG, PNG, or WebP format and let BookStitch automatically prepare them for a clean, consistent appearance. Intelligent image handling creates square artwork when needed, while built-in quality checks help you identify covers with insufficient resolution before exporting."}], "note": ""},
-    'open-tracks-book': {"title": "Smart Track Management", "subtitle": "Keep your tracks organized, reviewed, and under control.", "sections": [{"heading": "Intelligent Track Organization", "body": "Bring order to even the largest audio collections. BookStitch automatically organizes tracks using file names, track numbers, metadata, and disc information. Smart detection highlights duplicates, potential gaps, and uncertain track sequences, helping you identify problems early and keep your audiobook complete and properly arranged."}, {"heading": "Full Track Control", "body": "Stay in control of every track from import to export. Easily rearrange tracks, adjust titles, or exclude unwanted files without modifying your original audio. Review helpful warnings, fine-tune the order, and make sure everything is exactly where it belongs before creating your finished audiobook."}], "note": ""},
-    'open-passthrough-book': {"title": "Pass Through", "subtitle": "Preserve compatible audio without unnecessary re-encoding.", "sections": [{"heading": "Preserve Original Audio Quality", "body": "Why re-encode audio when you don't have to? BookStitch can reuse compatible AAC audio directly, preserving the original encoded data without unnecessary conversion or additional quality loss. This saves processing time while keeping your audio exactly as it was encoded."}, {"heading": "Intelligent Audio Processing", "body": "BookStitch automatically checks codecs, bitrates, channels, and sample rates to determine when Pass-Through is possible. Compatible AAC tracks are preserved, while others are converted when needed.\n\nPass-Through supports sample rates of 16.000 · 22.050 · 24.000 · 32.000 · 44.100 · 48.000 · 64.000 · 88.200 · 96.000 Hz, provided the audio and export settings are compatible.\n\nAll tracks are prepared for a seamless M4A or M4B audiobook."}], "note": ""},
+    'open-formats-book': {"title": "Formats", "subtitle": "Choose the audio sources that fit your collection.", "sections": [{"heading": "Supported Input Formats", "blocks": [{"text": "BookStitch supports the following audio sources and formats:"}, {"label": "Sources:", "text": "Local files and folders · Audio CDs · MP3 CDs · Data CDs"}, {"label": "Audio:", "text": "MP3 · M4A · M4B · AAC · WAV · FLAC · OGG · OGA · Opus · WMA (Legacy)"}, {"heading": "Supported Input Chapter Formats"}, {"text": "Reads embedded chapters from supported audio files:"}, {"list": [{"strong": "MP4 / QuickTime", "text": " chapters (M4A, M4B)"}, {"strong": "Nero", "text": " chapters (M4A, M4B)"}, {"strong": "ID3v2 CHAP / CTOC", "text": " chapters (MP3)"}, {"strong": "FLAC", "text": " embedded chapters"}, {"strong": "OGG / OGA / Opus", "text": " embedded chapters"}, {"strong": "Automatic chapter creation", "text": " from individual audio files, including titles and filenames"}]}]}, {"heading": "Supported Output Formats", "blocks": [{"text": "Export your audiobook as AAC audio in an M4A or M4B container, with flexible quality presets."}, {"label": "Output:", "text": "M4A · M4B (AAC)"}, {"label": "Presets:", "text": "64 kbps (Mono) · 96 kbps (Mono) · 96 · 128 · 160 · 192 · 256 kbps"}, {"heading": "Supported Output Chapter Formats"}, {"list": [{"strong": "MP4 / QuickTime", "text": " embedded chapters (M4A, M4B)"}, {"text": "Chapter titles and precise timestamps"}]}]}], "note": ""},
+    'open-chapter-book': {"title": "Chapter", "subtitle": "Shape clear chapters for a better listening experience.", "sections": [{"heading": "Smart Chapter Creation", "body": "Automatically detect and preserve embedded chapters, or generate chapter suggestions from track titles, tags, and filenames.\n\nSeamlessly combine audio files with embedded chapters and files containing only standard metadata tags into a single audiobook. BookStitch intelligently manages chapter structures, automatically calculates continuous chapter numbering, and keeps everything in the correct order."}, {"heading": "Custom Chapter Control", "body": "Take full control of your chapters with a powerful, customizable naming system. Build chapter titles by combining numbers, book or album titles, original or cleaned metadata tags, and filenames.\n\nDefine your own naming patterns, separators, and numbering styles. Rearrange chapters, adjust their timing, and edit individual titles. Keep existing chapters, refine automatic suggestions, or create an entirely custom chapter structure."}], "note": ""},
+    'open-metadata-book': {"title": "Metadata & Cover Art", "subtitle": "Give your audiobook the details and artwork it deserves.", "sections": [{"heading": "Rich Audiobook Metadata", "blocks": [{"richText": "Take full control of your audiobook with BookStitch's comprehensive metadata editor, supporting **43 metadata fields**."}, {"text": "Edit titles, authors, narrators, series and volumes, publishers, languages, genres, ISBN, ASIN, MusicBrainz IDs, and much more."}, {"richText": "Multi-value fields support multiple authors, narrators, and other contributors, with intuitive **drag-and-drop reordering**."}, {"text": "BookStitch automatically reads existing metadata from your source files whenever available and carries your selected information into the finished audiobook."}]}, {"heading": "Cover Art Integration", "blocks": [{"text": "BookStitch automatically detects and extracts embedded cover artwork from your source files whenever available."}, {"richText": "Import images in JPEG, PNG, or WebP format, or simply **drag and drop artwork directly from your browser or other applications**."}, {"text": "Non-square images are automatically cropped to square proportions. BookStitch then converts your artwork to high-quality JPEG at **1000 × 1000, 2000 × 2000, or 3000 × 3000 pixels**, automatically selecting the appropriate resolution based on the source image.", "rich": true}, {"text": "Advanced image processing includes color-profile management, careful transparency handling, and resolution quality checks to ensure clean, consistent cover artwork."}]}], "note": ""},
+    'open-tracks-book': {"title": "Smart Track Management", "subtitle": "Keep your tracks organized, reviewed, and under control.", "sections": [{"heading": "Intelligent Track Organization", "body": "Bring order to even the largest audio collections. BookStitch automatically organizes tracks using filenames, track numbers, metadata, and disc information.\n\nIts intelligent warning system detects missing or duplicate chapters, numbering gaps, incorrect track sequences, mismatches between filenames and metadata tags, and unreadable metadata. It also identifies missing, empty, invalid, or undecodable audio files, helping you catch problems early and keep your audiobook properly organized."}, {"heading": "Full Track Control", "body": "Stay in control of every track from import to export. Easily rearrange tracks, adjust titles, or exclude unwanted files without modifying your original audio.\n\nReview detected issues, fine-tune the track order, and make sure everything is exactly where it belongs before creating your finished audiobook."}], "note": ""},
+    'open-passthrough-book': {"title": "Pass Through", "subtitle": "Preserve compatible audio without unnecessary re-encoding.", "sections": [{"heading": "Preserve Original Audio Quality", "blocks": [{"text": "Why re-encode audio when you don't have to? BookStitch can reuse compatible AAC audio directly, preserving the original encoded data without unnecessary conversion or additional quality loss."}, {"richText": "You can even update metadata, replace cover artwork, and edit chapters **without re-encoding the audio**. As long as the audio remains compatible with Pass-Through, the original encoded audio is preserved."}, {"text": "This saves processing time while keeping your audio exactly as it was encoded."}]}, {"heading": "Intelligent Audio Processing", "body": "BookStitch automatically checks codecs, bitrates, channels, and sample rates to determine when Pass-Through is possible. Compatible AAC tracks are preserved, while others are converted when needed.\n\nPass-Through supports sample rates of 16,000 · 22,050 · 24,000 · 32,000 · 44,100 · 48,000 · 64,000 · 88,200 · 96,000 Hz, provided the audio and export settings are compatible.\n\nAll tracks are prepared for a seamless M4A or M4B audiobook."}], "note": ""},
     'open-drive-circle-book': {"title": "Drive Circle", "subtitle": "Keep multi-disc imports organized from drive to drive.", "sections": [{"heading": "Multiple Drives, One Workflow", "body": "Take the hassle out of importing large audiobook collections. Drive Circle lets you use up to five optical drives, automatically processing discs one after another. Whether you're working with audio CDs or MP3 CDs, BookStitch keeps everything organized and reduces the need for constant disc changes."}, {"heading": "Smart Disc Recognition", "body": "BookStitch automatically identifies inserted discs and keeps track of those already processed. Intelligent detection helps prevent duplicate imports, recognizes incorrect disc types, and guides you through disc changes. Even complex multi-disc collections become a smooth, organized workflow from the first disc to the last."}], "note": ""},
-    'open-project-book': {"title": "Project", "subtitle": "Keep your projects ready to revisit, refine, and re-export.", "sections": [{"heading": "Your Audiobook Project Library", "body": "Keep all your audiobook projects organized and accessible in one place. BookStitch preserves your project data, including tracks, chapters, metadata, and export settings, so you can return to your work whenever needed. Projects are retained for 180 days by default, with a configurable retention period of up to 360 days. Plenty of time to review, revisit, and perfect your audiobook collection."}, {"heading": "Review, Refine & Re-Export", "body": "Test your finished audiobook in your favorite player, whether it's Plex, Audiobookshelf, Smart AudioBook Player, or Apple Books. Want to change something? Simply reopen your project, update the metadata, choose a different audio quality preset, and export again without starting from scratch. Pause and resume your work as needed, keeping your projects ready for adjustments until you're completely satisfied with the result."}], "note": ""},
+    'open-project-book': {"title": "Project", "subtitle": "Keep your projects ready to revisit, refine, expand, and re-export.", "sections": [{"heading": "Your Audiobook Project Library", "body": "Keep all your audiobook projects organized and accessible in one place. BookStitch preserves your original source audio, tracks, chapters, metadata, cover artwork, and export settings, allowing you to return to your work whenever needed.\n\nFor audio CDs, source audio is retained in FLAC format. MP3 and data CD projects preserve the original audio files at their source quality, providing a reliable foundation for future exports.\n\nProjects are retained for 180 days by default, with a configurable retention period of up to 360 days."}, {"heading": "Review, Refine & Re-Export", "blocks": [{"text": "Your finished audiobook is never the end of the story. Reopen any project to update metadata, replace cover artwork, refine chapters, or rearrange tracks. You can even expand existing projects with additional audio files, new CDs, or newly released content."}, {"richText": "Want a different audio quality? Simply select another export preset and create a new M4A or M4B audiobook directly from the preserved source audio, **without re-encoding an already compressed export or starting from scratch**."}, {"text": "Experiment with different bitrates, make adjustments, and re-export as often as you like. Pause and resume your work whenever needed, keeping full control of your audiobook projects."}]}], "note": ""},
     'open-shadow-lantern': {
       "title": "Zero Bullshit",
       "subtitle": "Your Files. Your Rules. No Bullshit.",
@@ -86,34 +86,18 @@ markActiveSection(window.location.hash || '#home');
     "subtitle": "Your audiobook. Your player. Your choice.",
     "sections": [
         {
-            "heading": "Your Player, Your Choice",
-            "body": "Your finished audiobook deserves a player that handles it properly. M4A and M4B files are supported by many applications, but chapter navigation, embedded cover art, and metadata display can vary between players. Some applications recognize detailed audiobook metadata, while others only support a limited selection of fields.\n\nBookStitch takes these differences into account and includes several compatibility features to help keep your audiobook information accessible across different players.",
-            "subsections": [
-                {
-                    "heading": "Compatibility Metadata",
-                    "body": "Not every audiobook player recognizes dedicated metadata fields for narrators, series information, or other book details. To improve compatibility, BookStitch can include essential information such as the title, author, narrator, series, language, duration, and chapter count in the standard Description field.\n\nEven when a player ignores specialized metadata, this information may still be available in the book description. Some applications also include descriptions in their search functionality, making it easier to find audiobooks by details that would otherwise remain hidden.\n\nThis compatibility feature can be disabled in BookStitch's metadata settings."
-                },
-                {
-                    "heading": "Narrator & Composer Compatibility",
-                    "body": "The Composer field was originally intended for music, but some audiobook players use it to identify the narrator instead.\n\nBookStitch supports this convention by automatically copying narrator information into the Composer field while preserving the dedicated narrator metadata. This improves compatibility with applications that do not recognize the narrator field directly.\n\nThe option is enabled by default and can be turned off at any time. Your original composer information remains available when the compatibility mapping is disabled."
-                }
-            ]
+            "heading": "Built for Broad Compatibility",
+            "body": "BookStitch creates M4A and M4B audiobooks with AAC audio, embedded cover artwork, rich metadata, and QuickTime chapters.\n\nBecause audiobook players handle metadata differently, BookStitch includes intelligent compatibility features to make your audiobook information more accessible across different applications."
         },
         {
-            "heading": "Reliable Chapter Navigation",
-            "body": "BookStitch supports existing embedded chapters, including older Nero chapter markers, and combines them with chapters generated from your source files.\n\nFinished audiobooks use QuickTime chapter markers, avoiding the 255-chapter limitation of the older Nero format. Chapter positions are calculated across the complete audiobook, even when source files contain different chapter structures.\n\nThis provides a consistent chapter structure for players that support QuickTime chapters, including audiobooks with hundreds of chapter markers.",
-            "subsections": [
-                {
-                    "heading": "Test Your Favorite Player",
-                    "body": "Want to know how your player handles audiobook files? Download our compatibility samples and check the results yourself.\n\nExplore chapter navigation, embedded cover art, author and narrator information, series metadata, and the compatibility description directly in your preferred application.\n\nDifferent players may display the same audiobook differently. Our compatibility overview highlights known limitations and explains what to expect."
-                }
-            ]
+            "heading": "Smart Metadata Compatibility",
+            "body": "BookStitch can include essential audiobook details, such as title, author, narrator, series, language, duration, and chapter count, in the standard Description field. This helps keep important information accessible even when a player does not recognize specialized metadata fields.\n\nFor players that use the Composer field to identify narrators, BookStitch can automatically copy narrator information into that field while preserving the dedicated narrator metadata.\n\nBoth compatibility features can be configured or disabled in the metadata settings.\n\nFor detailed information about individual applications, supported features, and known limitations, explore the Compatibility Guide below."
         }
     ],
     "note": ""
 },
-    'open-shadow-projector': { title:'Player Compatibility Guide', subtitle:'How different players handle your audiobooks.', sections:[{heading:'Audiobookshelf',body:''},{heading:'Smart AudioBook Player',body:''}],note:'' },
-    'open-export-book': {"title": "M4A & M4B Export", "subtitle": "Export your finished audiobook in the format you need.", "sections": [{"heading": "One Complete Audiobook", "body": "Turn hundreds of individual audio tracks into a single, beautifully organized audiobook. BookStitch brings everything together in an M4A or M4B file, complete with chapter markers, embedded cover art, and carefully prepared metadata. One complete audiobook, ready for your collection."}, {"heading": "Flexible, High-Quality Export", "body": "Choose the format and audio quality that best suit your needs. BookStitch offers flexible AAC encoding presets ranging from 64 kbps mono to 256 kbps stereo. Audio tracks are carefully prepared and combined, with chapter timestamps verified to within 0.5 milliseconds in testing and consistent metadata throughout your finished audiobook."}], "note": ""},
+    'open-shadow-projector': { title:'Shadow Projector', subtitle:'', sections:[{heading:'',body:''},{heading:'',body:''}],note:'' },
+    'open-export-book': {"title": "M4A & M4B Export", "subtitle": "Create beautiful audiobooks for your personal collection, ready to enjoy for years to come.", "sections": [{"heading": "One Complete Audiobook", "body": "Turn hundreds of individual audio tracks into a single, beautifully organized audiobook.\n\nBookStitch brings everything together in an M4A or M4B file, complete with precisely timed chapters, embedded cover artwork, and carefully prepared metadata.\n\nUsing widely supported AAC audio and the established MP4/QuickTime chapter format, your finished audiobooks are ready for compatible players on iPhone, Android, and other devices.\n\nCreate a polished, lasting audiobook collection that is easy to organize, navigate, and enjoy."}, {"heading": "Flexible, High-Quality Export", "blocks": [{"richText": "Choose the format and audio quality that best suit your needs. BookStitch offers flexible AAC encoding presets ranging from **64 kbps mono to 256 kbps stereo**, giving you control over sound quality and file size."}, {"text": "Audio tracks are carefully processed and combined, with chapter timestamps verified to within 0.5 milliseconds in testing and consistent metadata throughout the finished audiobook."}, {"text": "Whether you're preserving a favorite story or building an extensive audiobook library, BookStitch helps you create high-quality files you'll enjoy returning to again and again."}]}], "note": ""},
   };
 
   syncOverviewCatchphrases();
@@ -136,6 +120,19 @@ markActiveSection(window.location.hash || '#home');
     });
   }
 
+  function alignFormatsChapterHeadings() {
+    const subheads = Array.from(columnSections, section => section.querySelector('.book-formats-subheading'));
+    subheads.forEach(node => { if (node) node.style.marginTop = ''; });
+    const visible = subheads.filter(Boolean);
+    if (visible.length < 2) return;
+    const tops = visible.map(node => node.getBoundingClientRect().top);
+    const targetTop = Math.max(...tops);
+    visible.forEach((node, index) => {
+      const offset = targetTop - tops[index];
+      if (offset > 1) node.style.marginTop = `${Math.ceil(offset)}px`;
+    });
+  }
+
   function setPanelCopy(triggerId) {
     const details = BOOK_DETAILS[triggerId] || BOOK_DETAILS['open-formats-book'];
     titleNode.textContent = details.title;
@@ -149,7 +146,30 @@ markActiveSection(window.location.hash || '#home');
       heading.textContent = section.heading;
       container.appendChild(heading);
       for (const block of section.blocks || [{ text: section.body }]) {
-        const paragraphs = block.text.split(/\n\n/);
+        if (block.heading) {
+          const subheading = document.createElement('h4');
+          subheading.className = 'book-formats-subheading';
+          subheading.textContent = block.heading;
+          container.appendChild(subheading);
+          continue;
+        }
+        if (block.list) {
+          const list = document.createElement('ul');
+          list.className = 'book-formats-list';
+          block.list.forEach(item => {
+            const li = document.createElement('li');
+            if (item.strong) {
+              const bold = document.createElement('strong');
+              bold.textContent = item.strong;
+              li.appendChild(bold);
+            }
+            li.appendChild(document.createTextNode(item.text || ''));
+            list.appendChild(li);
+          });
+          container.appendChild(list);
+          continue;
+        }
+        const paragraphs = (block.richText || block.text).split(/\n\n/);
         for (const paragraphText of paragraphs) {
         const paragraph = document.createElement('p');
         if (block.label) {
@@ -161,6 +181,16 @@ markActiveSection(window.location.hash || '#home');
           const strong = document.createElement('strong');
           strong.textContent = paragraphText;
           paragraph.appendChild(strong);
+        } else if (block.richText || block.rich) {
+          paragraphText.split(/(\*\*[^*]+\*\*)/g).forEach(part => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              const strong = document.createElement('strong');
+              strong.textContent = part.slice(2, -2);
+              paragraph.appendChild(strong);
+            } else if (part) {
+              paragraph.appendChild(document.createTextNode(part));
+            }
+          });
         } else {
           paragraph.appendChild(document.createTextNode(paragraphText));
         }
@@ -170,10 +200,7 @@ markActiveSection(window.location.hash || '#home');
       }
       // V89: contextual shortcuts to the nested download-samples view.
       // The link uses the same deep-link handler as an external #download-samples URL.
-      const sampleLinkColumn = {
-        'open-chapter-book': 0,
-        'open-metadata-book': 1
-      };
+      const sampleLinkColumn = {};
       if (sampleLinkColumn[triggerId] === index) {
         const sampleLink = document.createElement('a');
         sampleLink.href = '#download-samples';
@@ -217,47 +244,108 @@ markActiveSection(window.location.hash || '#home');
       }
     });
     if (triggerId === 'open-antique-projector') {
+      // V2.7: the compatibility guide is part of the Antique Projector,
+      // following the original two-column compatibility introduction.
+      const guideBlock = document.createElement('div');
+      guideBlock.className = 'combined-player-guide';
+
+      const guideHeading = document.createElement('div');
+      guideHeading.className = 'combined-player-guide-heading';
+      const ornament = document.createElement('span');
+      ornament.className = 'combined-player-ornament';
+      ornament.setAttribute('aria-hidden', 'true');
+      ornament.textContent = '✦';
+      const h2 = document.createElement('h2');
+      h2.textContent = 'Player Compatibility Guide';
+      const subtitle = document.createElement('p');
+      subtitle.textContent = 'How Different Players Handle Your Audiobooks';
+      guideHeading.append(ornament, h2, subtitle);
+      guideBlock.appendChild(guideHeading);
+
+      const guideColumns = document.createElement('div');
+      guideColumns.className = 'book-panel-columns combined-player-guide-columns';
+      playerGuideColumns.forEach(items => {
+        const col = document.createElement('section');
+        items.forEach(([heading, platforms, body]) => {
+          const h3 = document.createElement('h3');
+          h3.textContent = heading;
+          const platformsNode = document.createElement('p');
+          platformsNode.className = 'player-guide-platforms';
+          platformsNode.textContent = platforms;
+          col.append(h3, platformsNode);
+          body.split(/\\n\\n/).forEach(text => {
+            const p = document.createElement('p');
+            p.textContent = text;
+            col.appendChild(p);
+          });
+        });
+        guideColumns.appendChild(col);
+      });
+      guideBlock.appendChild(guideColumns);
+
+      const notice = document.createElement('section');
+      notice.className = 'player-guide-notice';
+      const heading = document.createElement('h3');
+      heading.textContent = 'Compatibility Notice';
+      notice.appendChild(heading);
+      [
+        'This information is based on official documentation, published reports, and hands-on testing of several players. Player compatibility can change as applications receive updates, fixing existing issues or occasionally introducing new ones.',
+        'The best way to check compatibility is to try it yourself. Download our sample audiobooks and see how your preferred player handles chapters, cover art, and metadata.'
+      ].forEach(text => {
+        const p = document.createElement('p');
+        p.textContent = text;
+        notice.appendChild(p);
+      });
+      guideBlock.appendChild(notice);
+
       const sampleCallout = document.createElement('div');
       sampleCallout.className = 'player-samples-callout';
+      const sampleLink = document.createElement('a');
+      sampleLink.href = '#download-samples';
+      sampleLink.className = 'player-samples-link gramophone-guide-trigger';
+      sampleLink.setAttribute('aria-label', 'Open Download Samples: Alice in Wonderland and Sherlock Holmes');
       const gramophone = document.createElement('img');
       gramophone.src = 'assets/gramophone-compatibility-v72.webp';
       gramophone.alt = '';
       gramophone.width = 112;
       gramophone.height = 112;
       gramophone.decoding = 'async';
-      const link = document.createElement('a');
-      link.href = '#download-samples';
-      link.className = 'player-samples-link';
-      link.textContent = 'Download Samples';
-      sampleCallout.append(gramophone, link);
-      columnSections[1].appendChild(sampleCallout);
-    }
-    if (triggerId === 'open-shadow-projector') {
-      columnSections.forEach((section, index) => {
-        section.replaceChildren();
-        playerGuideColumns[index].forEach(([heading,platforms,body]) => {
-          const h = document.createElement('h3'); h.textContent = heading;
-          const platform = document.createElement('p');
-          platform.className = 'player-guide-platforms'; platform.textContent = platforms;
-          section.append(h,platform);
-          body.split(/\n\n/).forEach(text => {const p=document.createElement('p'); p.textContent=text;section.append(p);});
-        });
-      });
-      const notice = document.createElement('section'); notice.className = 'player-guide-notice';
-      const heading = document.createElement('h3'); heading.textContent = 'Compatibility Notice';
-      notice.appendChild(heading);
-      const paragraphs = [
-        'This information is based on official documentation, published reports, and hands-on testing of several players. Player compatibility can change as applications receive updates, fixing existing issues or occasionally introducing new ones.',
-        'The best way to check compatibility is to try it yourself. Download our sample audiobooks and see how your preferred player handles chapters, cover art, and metadata.'
-      ];
-      paragraphs.forEach(text=>{const p=document.createElement('p');p.textContent=text;notice.appendChild(p);});
-      const guide = document.createElement('button'); guide.type='button';
-      guide.className='gramophone-guide-trigger'; guide.setAttribute('aria-label','Open the gramophone details');
-      const art=document.createElement('img'); art.src='assets/gramophone-compatibility-v72.webp';art.alt='';
-      art.width=1164;art.height=1330;
-      const caption=document.createElement('span');caption.textContent='Download Samples';
-      guide.append(art,caption);
-      noteNode.replaceChildren(notice, guide);
+      const label = document.createElement('span');
+      label.textContent = 'Download Samples';
+      sampleLink.append(gramophone, label);
+      sampleCallout.appendChild(sampleLink);
+      guideBlock.appendChild(sampleCallout);
+      noteNode.replaceChildren(guideBlock);
+    } else if (triggerId === 'open-chapter-book') {
+      // Centered invitation follows both unchanged Chapter text columns.
+      const invitation = document.createElement('div');
+      invitation.className = 'chapter-samples-invitation';
+      const explanation = document.createElement('p');
+      explanation.textContent = 'Check whether your favorite player supports audiobook chapters.';
+      const sampleLink = document.createElement('a');
+      sampleLink.href = '#download-samples';
+      sampleLink.className = 'book-sample-shortcut';
+      sampleLink.textContent = 'Download BookStitch Sample Audiobook';
+      sampleLink.setAttribute('aria-label', 'Open Download Samples');
+      invitation.append(explanation, sampleLink);
+      noteNode.replaceChildren(invitation);
+    } else if (triggerId === 'open-metadata-book') {
+      // Centered invitation follows both unchanged Metadata & Cover Art columns.
+      const invitation = document.createElement('div');
+      invitation.className = 'chapter-samples-invitation';
+      const explanation = document.createElement('p');
+      explanation.textContent = 'Check whether your favorite player supports metadata and cover art.';
+      const sampleLink = document.createElement('a');
+      sampleLink.href = '#download-samples';
+      sampleLink.className = 'book-sample-shortcut';
+      sampleLink.textContent = 'Download BookStitch Sample Audiobook';
+      sampleLink.setAttribute('aria-label', 'Open Download Samples');
+      invitation.append(explanation, sampleLink);
+      noteNode.replaceChildren(invitation);
+    } else if (triggerId === 'open-shadow-projector') {
+      // Reserved for future content. Keep the Shadow Projector clickable.
+      columnSections.forEach(section => section.replaceChildren());
+      noteNode.replaceChildren();
     } else {
       noteNode.textContent = details.note;
     }
@@ -317,7 +405,7 @@ markActiveSection(window.location.hash || '#home');
         if (active) close({keepHash:true});
         return; // The screenshot gallery maintains its own deep-link handler.
       }
-      const id = nested ? DETAILS_BY_HASH['shadow-projector'] : key === 'imprint' ? 'open-imprint' : DETAILS_BY_HASH[key];
+      const id = nested ? DETAILS_BY_HASH['antique-projector'] : key === 'imprint' ? 'open-imprint' : DETAILS_BY_HASH[key];
       if (!id) {
         if (guideActive) closeGuide({keepHash:true});
         if (active) close({keepHash:true});
@@ -422,6 +510,7 @@ markActiveSection(window.location.hash || '#home');
     dialog.classList.add('is-ready');
     panel.setAttribute('aria-hidden', 'false');
     detailScroller.scrollTop = 0;
+    if (trigger.id === 'open-formats-book') requestAnimationFrame(alignFormatsChapterHeadings);
     closeButton.focus({preventScroll: true});
   }
 
@@ -568,7 +657,7 @@ markActiveSection(window.location.hash || '#home');
   let guideActive = false;
   let guideReturnFocus = null;
   function closeGuide(options = {}) {
-    if (!options.keepHash) setDetailHash('#shadow-projector');
+    if (!options.keepHash) setDetailHash('#antique-projector');
     if (!guideActive) return;
     guideActive = false;
     guideDialog.hidden = true;
@@ -618,7 +707,7 @@ markActiveSection(window.location.hash || '#home');
   }
   dialog.addEventListener('click', event => {
     const trigger = event.target.closest('.gramophone-guide-trigger');
-    if (trigger) void openGuide(trigger);
+    if (trigger) { event.preventDefault(); void openGuide(trigger); }
   });
   guideDialog.querySelectorAll('[data-book-close]').forEach(node=>node.addEventListener('click',closeGuide));
   document.addEventListener('keydown',event=>{
