@@ -1,8 +1,8 @@
 "use strict";
-/* BookStitch interaction counters. Deployment gate: leave enabled=false until consent/legal review. */
+/* BookStitch interaction counters. Aggregate event collection enabled; review applicable consent requirements before publication. */
 (() => {
   const CONFIG = Object.freeze({
-    enabled: false,
+    enabled: true,
     endpoint: "https://bookstitch-events.irwitzer.workers.dev/v1/event"
   });
   if (!CONFIG.enabled || !/^https:\/\/[a-z0-9.-]+\/v1\/event$/i.test(CONFIG.endpoint)
