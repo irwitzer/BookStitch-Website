@@ -1168,7 +1168,7 @@ html,body{max-width:100%;overflow-x:clip;}
   content:"";
   position:absolute;
   inset:0;
-  background:url('../assets/gallery-altgold-frame-v42.webp') center / 100% 100% no-repeat;
+  background:none;
   z-index:2;
   pointer-events:none;
 }
@@ -1199,7 +1199,7 @@ html,body{max-width:100%;overflow-x:clip;}
 .gallery-close{position:fixed;right:clamp(10px,2.4vw,38px);top:clamp(9px,2.4vh,32px);z-index:6}
 .gallery-theatre{width:min(1250px,100%);display:block;min-height:0;margin:0 auto}
 .gallery-screen-frame{width:100%;aspect-ratio:3/2;padding:12.4% 12.25% 15.9%;border:0;box-shadow:none;}
-.gallery-screen-frame::before{background-image:url('../assets/gallery-altgold-frame-v42.webp')}
+.gallery-screen-frame::before{background-image:none}
 .gallery-screen{width:100%;height:100%;aspect-ratio:auto}
 .gallery-foot{width:min(480px,100%);margin:0 auto;justify-content:space-between}
 .gallery-dots{justify-content:center;margin:0 auto 8px}
@@ -2100,3 +2100,7 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;mar
   .library-stage-center {background-image:url('../assets/library-center-v40-cosmic-opt-768.webp') !important;}
 }
 .nav-links a::before {background-image:url('../assets/nav-cyan-shimmer-opt-300.webp') !important;}
+
+/* Keep 20+ gallery indicators usable without changing the seven-slide layout. */
+.gallery-dots.gallery-dots-long{max-width:min(78vw,480px);overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:thin;overscroll-behavior-inline:contain}
+.gallery-dots.gallery-dots-long button{flex:0 0 auto}

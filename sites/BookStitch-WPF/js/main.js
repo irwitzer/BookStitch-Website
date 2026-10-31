@@ -799,42 +799,117 @@ markActiveSection(window.location.hash || '#home');
   const title=dialog.querySelector('#gallery-slide-title'),desc=dialog.querySelector('#gallery-slide-desc');
   const count=dialog.querySelector('#gallery-slide-count');
   const screenshot=dialog.querySelector('#gallery-screenshot');
-  const dots=[...dialog.querySelectorAll('[data-gallery-index]')];
-  // Responsive WebP variants: the full original remains available for large/high-DPI displays.
+  // Navigation follows the screenshot list automatically, including future additions.
+  const dotBar=dialog.querySelector('.gallery-dots');
+  const dots=[...dotBar.querySelectorAll('[data-gallery-index]')];
+  while(dots.length<slides.length){
+    const dot=document.createElement('button');
+    dot.type='button';
+    dot.dataset.galleryIndex=String(dots.length);
+    dot.setAttribute('aria-label',`Show slide ${dots.length+1}`);
+    dotBar.appendChild(dot);
+    dots.push(dot);
+  }
+  while(dots.length>slides.length)dots.pop().remove();
+  dotBar.classList.toggle('gallery-dots-long',slides.length>10);
+
+  // Existing 640/960px screenshot variants are reused for responsive preloading.
   const responsiveSizes='(max-width: 620px) calc(100vw - 24px), (max-width: 1024px) calc(100vw - 60px), min(90vw, 1250px)';
   const variants=slide=>{
     const stem=slide.src.replace(/\.webp$/,'');
     return `${stem}-640.webp 640w, ${stem}-960.webp 960w, ${slide.src} ${slide.width}w`;
   };
-  // Keep a bounded image cache: the first four screenshots are warmed after load;
-  // opening the gallery adds a few more, rather than downloading future galleries in full.
+
+  // Warm every screenshot gradually after window.load, not during the critical
+  // render. Only one low-priority request at a time, separated by idle time.
+  // The browser HTTP cache holds completed downloads; retain at most eight Image
+  // objects so large future galleries do not pin dozens of bitmaps in memory.
+  const warmed=new Set();
   const preloaded=new Map();
   const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
   const conserveData=()=>Boolean(connection?.saveData || /^(slow-2g|2g)$/.test(connection?.effectiveType||''));
-  const idle=callback=>{
-    if('requestIdleCallback' in window) window.requestIdleCallback(callback,{timeout:2500});
-    else window.setTimeout(callback,650);
+  const limitedNetwork=()=>Boolean(connection?.effectiveType==='3g' ||
+    (typeof connection?.downlink==='number' && connection.downlink<1.5));
+  let readyToWarm=false,opening=false,activeWarm=null,warmTimer=0,warmIdle=0;
+  let lastInteraction=Date.now();
+  function cancelScheduledWarm(){
+    if(warmTimer){clearTimeout(warmTimer);warmTimer=0;}
+    if(warmIdle && 'cancelIdleCallback' in window){window.cancelIdleCallback(warmIdle);warmIdle=0;}
+  }
+  function candidate(){
+    // For an open gallery, neighboring images have priority over the rest.
+    if(!dialog.hidden){
+      for(const n of [index+1,index+2,index-1]){
+        const i=(n+slides.length)%slides.length;
+        if(!warmed.has(i))return i;
+      }
+    }
+    for(let i=0;i<slides.length;i++)if(!warmed.has(i))return i;
+    return -1;
+  }
+  function scheduleWarm(delay=450){
+    if(!readyToWarm || opening || activeWarm || document.hidden || conserveData())return;
+    if(limitedNetwork() && warmed.size>=3)return;
+    if(candidate()<0)return;
+    cancelScheduledWarm();
+    warmTimer=window.setTimeout(()=>{
+      warmTimer=0;
+      if(opening || activeWarm || document.hidden || conserveData())return;
+      const quietFor=Date.now()-lastInteraction;
+      if(quietFor<700){scheduleWarm(700-quietFor);return;}
+      const start=()=>{
+        warmIdle=0;
+        if(opening || activeWarm || document.hidden || conserveData())return;
+        if(Date.now()-lastInteraction<700){scheduleWarm();return;}
+        if(limitedNetwork() && warmed.size>=3)return;
+        const i=candidate();
+        if(i<0)return;
+        warmed.add(i);
+        const slide=slides[i],image=new Image();
+        activeWarm=image;
+        image.decoding='async';
+        image.fetchPriority='low';
+        image.sizes=responsiveSizes;
+        // Attach handlers before setting sources, including when cached.
+        const finished=ok=>{
+          if(ok){
+            preloaded.set(i,image);
+            while(preloaded.size>8)preloaded.delete(preloaded.keys().next().value);
+          }
+          if(activeWarm===image)activeWarm=null;
+          scheduleWarm(300);
+        };
+        image.onload=()=>finished(true);
+        image.onerror=()=>finished(false); // Do not retry missing files forever.
+        image.srcset=variants(slide);
+        image.src=slide.src;
+      };
+      if('requestIdleCallback' in window){
+        // No deadline: a timeout would force downloads during busy animation.
+        warmIdle=window.requestIdleCallback(start);
+      }else start();
+    },delay);
+  }
+  function noteActivity(){
+    lastInteraction=Date.now();
+    cancelScheduledWarm();
+    if(!opening)scheduleWarm(850);
+  }
+  for(const type of ['pointerdown','keydown','wheel','touchmove']){
+    document.addEventListener(type,noteActivity,{passive:true});
+  }
+  window.addEventListener('scroll',noteActivity,{passive:true});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)cancelScheduledWarm();
+    else scheduleWarm(1000);
+  });
+  connection?.addEventListener?.('change',()=>scheduleWarm(400));
+  const beginWarm=()=>{
+    readyToWarm=true;
+    scheduleWarm(650);
   };
-  function prefetch(slideIndex){
-    if(conserveData() || document.hidden)return;
-    slideIndex=(slideIndex+slides.length)%slides.length;
-    if(preloaded.has(slideIndex))return;
-    const slide=slides[slideIndex];
-    const image=new Image();
-    image.decoding='async';
-    image.fetchPriority='low';
-    image.sizes=responsiveSizes;
-    image.srcset=variants(slide);
-    image.src=slide.src;
-    image.onerror=()=>preloaded.delete(slideIndex);
-    preloaded.set(slideIndex,image);
-    while(preloaded.size>8){preloaded.delete(preloaded.keys().next().value);}
-  }
-  function prefetchNearby(){
-    if(conserveData())return;
-    prefetch(index+1);                    // The next slide is the first priority.
-    idle(()=>{if(!dialog.hidden)prefetch(index+2);});
-  }
+  if(document.readyState==='complete')beginWarm();
+  else window.addEventListener('load',beginWarm,{once:true});
   function render(){
     const slide=slides[index];
     title.textContent=slide.title;
@@ -843,6 +918,7 @@ markActiveSection(window.location.hash || '#home');
     screenshot.alt=slide.alt;
     screenshot.width=slide.width;
     screenshot.height=slide.height;
+    screenshot.fetchPriority='high';
     screenshot.sizes=responsiveSizes;
     screenshot.srcset=variants(slide);
     screenshot.src=slide.src;
@@ -851,7 +927,9 @@ markActiveSection(window.location.hash || '#home');
       if(i===index)d.setAttribute('aria-current','true');
       else d.removeAttribute('aria-current');
     });
-    prefetchNearby();
+    // An already-prefetched file is served from cache; otherwise the visible
+    // screenshot is a high-priority request. Background warming waits for idle.
+    scheduleWarm(500);
   }
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
   function cancelFlight(){
@@ -863,14 +941,12 @@ markActiveSection(window.location.hash || '#home');
   async function open(triggerEl,options={}){
     if (!options.fromUrl && location.hash !== '#magic-lantern') history.pushState({bookStitchDetail:true},'','#magic-lantern');
     previousFocus=document.activeElement;
+    opening=true;
+    cancelScheduledWarm();
     activeSource=triggerEl.querySelector('.lantern-visual img');
     index=0;render();
     const sourceRect=activeSource.getBoundingClientRect();
     dialog.hidden=false;
-    prefetchNearby();
-    // On entering the gallery, gently warm screenshots 5 and 6 in the background.
-    // Subsequent slides are prefetched only as the visitor navigates.
-    idle(()=>{if(!dialog.hidden){prefetch(4);idle(()=>{if(!dialog.hidden)prefetch(5);});}});
     dialog.classList.remove('gallery-landed');
     dialog.setAttribute('aria-hidden','false');
     document.body.classList.add('book-dialog-visible');
@@ -901,23 +977,19 @@ markActiveSection(window.location.hash || '#home');
     }
     cancelFlight();
     dialog.classList.add('gallery-landed');
+    opening=false;
     dialog.querySelector('.gallery-close').focus();
+    scheduleWarm(550);
   }
-  function close(options={}){if(!options.keepHash && location.hash === '#magic-lantern') history.replaceState(null,'','#magic');cancelFlight();dialog.classList.remove('gallery-landed');dialog.hidden=true;dialog.setAttribute('aria-hidden','true');document.body.classList.remove('book-dialog-visible');previousFocus?.focus();activeSource=null;}
+  function close(options={}){if(!options.keepHash && location.hash === '#magic-lantern') history.replaceState(null,'','#magic');cancelFlight();opening=false;dialog.classList.remove('gallery-landed');dialog.hidden=true;dialog.setAttribute('aria-hidden','true');document.body.classList.remove('book-dialog-visible');previousFocus?.focus();activeSource=null;scheduleWarm(750);}
   function move(amount){index=(index+amount+slides.length)%slides.length;render();}
   triggers.forEach(trigger=>{
     trigger.addEventListener('click',()=>open(trigger));
-    trigger.addEventListener('pointerenter',()=>prefetch(0),{once:true});
-    trigger.addEventListener('focus',()=>prefetch(0),{once:true});
+    // A visitor hovering/focusing the lantern may want the gallery next;
+    // prioritize its first screenshot without starting before window.load.
+    trigger.addEventListener('pointerenter',()=>scheduleWarm(20));
+    trigger.addEventListener('focus',()=>scheduleWarm(20));
   });
-  // Warm the first four responsive screenshots only after the primary page is loaded.
-  // Low fetch priority + idle scheduling keeps the initial page and its fonts first.
-  // Data Saver and very slow connections are respected by prefetch().
-  const warmOpeningSlides=()=>idle(()=>{
-    for(let i=0;i<Math.min(4,slides.length);i++)prefetch(i);
-  });
-  if(document.readyState==='complete')warmOpeningSlides();
-  else window.addEventListener('load',warmOpeningSlides,{once:true});
   function syncGalleryHash(){
     if(location.hash === '#magic-lantern'){
       if(dialog.hidden && triggers[0]) void open(triggers[0],{fromUrl:true,instant:true});
