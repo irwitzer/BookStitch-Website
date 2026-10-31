@@ -1970,3 +1970,33 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;mar
   border-color:#a5dddd;color:#fff4d9;
   background:linear-gradient(145deg,rgba(24,87,91,.92),rgba(9,40,46,.98));
 }
+
+/* V2.23: keep nested samples invitation visible and genuinely larger. */
+#book-dialog[data-detail-trigger="open-antique-projector"] .combined-player-guide .player-samples-callout {
+  margin:8px auto 17px;
+  padding-top:2px;
+  border-top:0;
+}
+#book-dialog[data-detail-trigger="open-antique-projector"] .combined-player-guide .player-samples-callout img {
+  display:block;
+  width:184px;
+  height:207px;
+  max-width:none;
+  object-fit:contain;
+  transform:translateX(8px);
+  margin:0 auto;
+}
+#book-dialog[data-detail-trigger="open-antique-projector"] .combined-player-guide .player-samples-callout a {
+  width:min(100%,240px);
+  margin:0 auto;
+}
+@media(max-width:600px) {
+  #book-dialog[data-detail-trigger="open-antique-projector"] .combined-player-guide .player-samples-callout img {
+    width:160px;
+    height:181px;
+    transform:translateX(7px);
+  }
+  #book-dialog[data-detail-trigger="open-formats-book"] .book-formats-subheading {
+    margin-top:22px !important;
+  }
+}

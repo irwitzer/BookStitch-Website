@@ -55,7 +55,7 @@ markActiveSection(window.location.hash || '#home');
       ],
       note: ''
     },
-    'open-formats-book': {"title": "Formats", "subtitle": "Choose the audio sources that fit your collection.", "sections": [{"heading": "Supported Input Formats", "blocks": [{"text": "BookStitch supports the following audio sources and formats:"}, {"label": "Sources:", "text": "Local files and folders · Audio CDs · MP3 CDs · Data CDs"}, {"label": "Audio:", "text": "MP3 · M4A · M4B · AAC · WAV · FLAC · OGG · OGA · Opus · WMA (Legacy)"}, {"heading": "Supported Input Chapter Formats"}, {"text": "Reads embedded chapters from supported audio files:"}, {"list": [{"strong": "MP4 / QuickTime", "text": " chapters (M4A, M4B)"}, {"strong": "Nero", "text": " chapters (M4A, M4B)"}, {"strong": "ID3v2 CHAP / CTOC", "text": " chapters (MP3)"}, {"strong": "FLAC", "text": " embedded chapters"}, {"strong": "OGG / OGA / Opus", "text": " embedded chapters"}, {"strong": "Automatic chapter creation", "text": " from individual audio files, including titles and filenames"}]}]}, {"heading": "Supported Output Formats", "blocks": [{"text": "Export your audiobook as AAC audio in an M4A or M4B container, with flexible quality presets."}, {"label": "Output:", "text": "M4A · M4B (AAC)"}, {"label": "Presets:", "text": "64 kbps (Mono) · 96 kbps (Mono) · 96 · 128 · 160 · 192 · 256 kbps"}, {"heading": "Supported Output Chapter Formats"}, {"list": [{"strong": "MP4 / QuickTime", "text": " embedded chapters (M4A, M4B)"}, {"text": "Chapter titles and precise timestamps"}]}]}], "note": ""},
+    'open-formats-book': {"title": "Formats", "subtitle": "From audio files to CDs, bring your sources together.", "sections": [{"heading": "Supported Input Formats", "blocks": [{"text": "BookStitch supports the following audio sources and formats:"}, {"label": "Sources:", "text": "Local files and folders · Audio CDs · MP3 CDs · Data CDs"}, {"label": "Audio:", "text": "MP3 · M4A · M4B · AAC · WAV · FLAC · OGG · OGA · Opus · WMA (Legacy)"}, {"heading": "Supported Input Chapter Formats"}, {"text": "Reads embedded chapters from supported audio files:"}, {"list": [{"strong": "MP4 / QuickTime", "text": " chapters (M4A, M4B)"}, {"strong": "Nero", "text": " chapters (M4A, M4B)"}, {"strong": "ID3v2 CHAP / CTOC", "text": " chapters (MP3)"}, {"strong": "FLAC", "text": " embedded chapters"}, {"strong": "OGG / OGA / Opus", "text": " embedded chapters"}, {"strong": "Automatic chapter creation", "text": " from individual audio files, including titles and filenames"}]}]}, {"heading": "Supported Output Formats", "blocks": [{"text": "Export your audiobook as AAC audio in an M4A or M4B container, with flexible quality presets."}, {"label": "Output:", "text": "M4A · M4B (AAC)"}, {"label": "Presets:", "text": "64 kbps (Mono) · 96 kbps (Mono) · 96 · 128 · 160 · 192 · 256 kbps"}, {"heading": "Supported Output Chapter Formats"}, {"list": [{"strong": "MP4 / QuickTime", "text": " embedded chapters (M4A, M4B)"}, {"text": "Chapter titles and precise timestamps"}]}]}], "note": ""},
     'open-chapter-book': {"title": "Chapter", "subtitle": "Shape clear chapters for a better listening experience.", "sections": [{"heading": "Smart Chapter Creation", "body": "Automatically detect and preserve embedded chapters, or generate chapter suggestions from track titles, tags, and filenames.\n\nSeamlessly combine audio files with embedded chapters and files containing only standard metadata tags into a single audiobook. BookStitch intelligently manages chapter structures, automatically calculates continuous chapter numbering, and keeps everything in the correct order."}, {"heading": "Custom Chapter Control", "body": "Take full control of your chapters with a powerful, customizable naming system. Build chapter titles by combining numbers, book or album titles, original or cleaned metadata tags, and filenames.\n\nDefine your own naming patterns, separators, and numbering styles. Rearrange chapters, adjust their timing, and edit individual titles. Keep existing chapters, refine automatic suggestions, or create an entirely custom chapter structure."}], "note": ""},
     'open-metadata-book': {"title": "Metadata & Cover Art", "subtitle": "Give your audiobook the details and artwork it deserves.", "sections": [{"heading": "Rich Audiobook Metadata", "blocks": [{"richText": "Take full control of your audiobook with BookStitch's comprehensive metadata editor, supporting **43 metadata fields**."}, {"text": "Edit titles, authors, narrators, series and volumes, publishers, languages, genres, ISBN, ASIN, MusicBrainz IDs, and much more."}, {"richText": "Multi-value fields support multiple authors, narrators, and other contributors, with intuitive **drag-and-drop reordering**."}, {"text": "BookStitch automatically reads existing metadata from your source files whenever available and carries your selected information into the finished audiobook."}]}, {"heading": "Cover Art Integration", "blocks": [{"text": "BookStitch automatically detects and extracts embedded cover artwork from your source files whenever available."}, {"richText": "Import images in JPEG, PNG, or WebP format, or simply **drag and drop artwork directly from your browser or other applications**."}, {"text": "Non-square images are automatically cropped to square proportions. BookStitch then converts your artwork to high-quality JPEG at **1000 × 1000, 2000 × 2000, or 3000 × 3000 pixels**, automatically selecting the appropriate resolution based on the source image.", "rich": true}, {"text": "Advanced image processing includes color-profile management, careful transparency handling, and resolution quality checks to ensure clean, consistent cover artwork."}]}], "note": ""},
     'open-tracks-book': {"title": "Smart Track Management", "subtitle": "Keep your tracks organized, reviewed, and under control.", "sections": [{"heading": "Intelligent Track Organization", "body": "Bring order to even the largest audio collections. BookStitch automatically organizes tracks using filenames, track numbers, metadata, and disc information.\n\nIts intelligent warning system detects missing or duplicate chapters, numbering gaps, incorrect track sequences, mismatches between filenames and metadata tags, and unreadable metadata. It also identifies missing, empty, invalid, or undecodable audio files, helping you catch problems early and keep your audiobook properly organized."}, {"heading": "Full Track Control", "body": "Stay in control of every track from import to export. Easily rearrange tracks, adjust titles, or exclude unwanted files without modifying your original audio.\n\nReview detected issues, fine-tune the track order, and make sure everything is exactly where it belongs before creating your finished audiobook."}], "note": ""},
@@ -123,6 +123,8 @@ markActiveSection(window.location.hash || '#home');
   function alignFormatsChapterHeadings() {
     const subheads = Array.from(columnSections, section => section.querySelector('.book-formats-subheading'));
     subheads.forEach(node => { if (node) node.style.marginTop = ''; });
+    // On mobile the columns are stacked; never introduce alignment whitespace.
+    if (window.matchMedia('(max-width:600px)').matches) return;
     const visible = subheads.filter(Boolean);
     if (visible.length < 2) return;
     const tops = visible.map(node => node.getBoundingClientRect().top);
@@ -480,20 +482,21 @@ markActiveSection(window.location.hash || '#home');
         objectFit: 'contain',
         pointerEvents: 'none',
         zIndex: '1002',
-        transformOrigin: 'center center',
+        transformOrigin: 'top left',
         filter: 'drop-shadow(0 16px 34px rgba(0,0,0,.58))',
       });
       document.body.appendChild(ghost);
       source.style.visibility = 'hidden';
       const landing = image.getBoundingClientRect();
-      const dx = landing.left - original.left;
-      const dy = landing.top - original.top;
-      const sx = landing.width / original.width;
-      const sy = landing.height / original.height;
+      // Uniform scale preserves the artwork proportions. Position the flying
+      // bitmap by its center so it lands precisely on the destination image.
+      const scale = Math.min(landing.width / original.width, landing.height / original.height);
+      const dx = landing.left + landing.width / 2 - original.left - original.width * scale / 2;
+      const dy = landing.top + landing.height / 2 - original.top - original.height * scale / 2;
       animation = ghost.animate(
         [
           { transform: 'translate(0,0) scale(1)', opacity: 1 },
-          { transform: `translate(${dx}px,${dy}px) scale(${sx},${sy})`, opacity: 1 }
+          { transform: `translate(${dx}px,${dy}px) scale(${scale})`, opacity: 1 }
         ],
         { duration: 820, easing: 'cubic-bezier(.23,.78,.25,1)', fill: 'forwards' }
       );
@@ -692,9 +695,13 @@ markActiveSection(window.location.hash || '#home');
         transformOrigin:'top left'
       });
       document.body.append(flying);
+      // Preserve aspect ratio throughout the nested gramophone flight.
+      const scale = Math.min(to.width / from.width, to.height / from.height);
+      const dx = to.left + to.width/2 - from.left - from.width*scale/2;
+      const dy = to.top + to.height/2 - from.top - from.height*scale/2;
       const a = flying.animate([
         {transform:'translate(0,0) scale(1)'},
-        {transform:`translate(${to.left-from.left}px,${to.top-from.top}px) scale(${to.width/from.width},${to.height/from.height})`}
+        {transform:`translate(${dx}px,${dy}px) scale(${scale})`}
       ],{duration:550,easing:'cubic-bezier(.23,.78,.25,1)'});
       try { await a.finished; } catch (_) {}
       flying.remove();
@@ -719,6 +726,9 @@ markActiveSection(window.location.hash || '#home');
   },true);
   window.addEventListener('resize',()=>{
     if (guideActive) guideDialog.style.setProperty('--detail-book-size',targetSize()+'px');
+    if (active && activeTrigger?.id === 'open-formats-book') {
+      requestAnimationFrame(alignFormatsChapterHeadings);
+    }
   });
 
   triggers.forEach(trigger => trigger.addEventListener('click', () => open(trigger)));
