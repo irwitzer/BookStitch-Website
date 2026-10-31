@@ -807,20 +807,58 @@ markActiveSection(window.location.hash || '#home');
   const count=dialog.querySelector('#gallery-slide-count');
   const screenshot=dialog.querySelector('#gallery-screenshot');
   const dots=[...dialog.querySelectorAll('[data-gallery-index]')];
+  // Responsive WebP variants: the full original remains available for large/high-DPI displays.
+  const responsiveSizes='(max-width: 620px) calc(100vw - 24px), (max-width: 1024px) calc(100vw - 60px), min(90vw, 1250px)';
+  const variants=slide=>{
+    const stem=slide.src.replace(/\.webp$/,'');
+    return `${stem}-640.webp 640w, ${stem}-960.webp 960w, ${slide.src} ${slide.width}w`;
+  };
+  // Keep a bounded image cache: the first four screenshots are warmed after load;
+  // opening the gallery adds a few more, rather than downloading future galleries in full.
+  const preloaded=new Map();
+  const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+  const conserveData=()=>Boolean(connection?.saveData || /^(slow-2g|2g)$/.test(connection?.effectiveType||''));
+  const idle=callback=>{
+    if('requestIdleCallback' in window) window.requestIdleCallback(callback,{timeout:2500});
+    else window.setTimeout(callback,650);
+  };
+  function prefetch(slideIndex){
+    if(conserveData() || document.hidden)return;
+    slideIndex=(slideIndex+slides.length)%slides.length;
+    if(preloaded.has(slideIndex))return;
+    const slide=slides[slideIndex];
+    const image=new Image();
+    image.decoding='async';
+    image.fetchPriority='low';
+    image.sizes=responsiveSizes;
+    image.srcset=variants(slide);
+    image.src=slide.src;
+    image.onerror=()=>preloaded.delete(slideIndex);
+    preloaded.set(slideIndex,image);
+    while(preloaded.size>8){preloaded.delete(preloaded.keys().next().value);}
+  }
+  function prefetchNearby(){
+    if(conserveData())return;
+    prefetch(index+1);                    // The next slide is the first priority.
+    idle(()=>{if(!dialog.hidden)prefetch(index+2);});
+  }
   function render(){
     const slide=slides[index];
     title.textContent=slide.title;
     desc.textContent=slide.desc;
     count.textContent=`${index+1} / ${slides.length}`;
-    screenshot.src=slide.src;
     screenshot.alt=slide.alt;
     screenshot.width=slide.width;
     screenshot.height=slide.height;
+    screenshot.sizes=responsiveSizes;
+    screenshot.srcset=variants(slide);
+    screenshot.src=slide.src;
     dots.forEach((d,i)=>{
       d.classList.toggle('is-active',i===index);
       if(i===index)d.setAttribute('aria-current','true');
       else d.removeAttribute('aria-current');
     });
+    prefetchNearby();
   }
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
   function cancelFlight(){
@@ -836,6 +874,10 @@ markActiveSection(window.location.hash || '#home');
     index=0;render();
     const sourceRect=activeSource.getBoundingClientRect();
     dialog.hidden=false;
+    prefetchNearby();
+    // On entering the gallery, gently warm screenshots 5 and 6 in the background.
+    // Subsequent slides are prefetched only as the visitor navigates.
+    idle(()=>{if(!dialog.hidden){prefetch(4);idle(()=>{if(!dialog.hidden)prefetch(5);});}});
     dialog.classList.remove('gallery-landed');
     dialog.setAttribute('aria-hidden','false');
     document.body.classList.add('book-dialog-visible');
@@ -870,7 +912,19 @@ markActiveSection(window.location.hash || '#home');
   }
   function close(options={}){if(!options.keepHash && location.hash === '#magic-lantern') history.replaceState(null,'','#magic');cancelFlight();dialog.classList.remove('gallery-landed');dialog.hidden=true;dialog.setAttribute('aria-hidden','true');document.body.classList.remove('book-dialog-visible');previousFocus?.focus();activeSource=null;}
   function move(amount){index=(index+amount+slides.length)%slides.length;render();}
-  triggers.forEach(trigger=>trigger.addEventListener('click',()=>open(trigger)));
+  triggers.forEach(trigger=>{
+    trigger.addEventListener('click',()=>open(trigger));
+    trigger.addEventListener('pointerenter',()=>prefetch(0),{once:true});
+    trigger.addEventListener('focus',()=>prefetch(0),{once:true});
+  });
+  // Warm the first four responsive screenshots only after the primary page is loaded.
+  // Low fetch priority + idle scheduling keeps the initial page and its fonts first.
+  // Data Saver and very slow connections are respected by prefetch().
+  const warmOpeningSlides=()=>idle(()=>{
+    for(let i=0;i<Math.min(4,slides.length);i++)prefetch(i);
+  });
+  if(document.readyState==='complete')warmOpeningSlides();
+  else window.addEventListener('load',warmOpeningSlides,{once:true});
   function syncGalleryHash(){
     if(location.hash === '#magic-lantern'){
       if(dialog.hidden && triggers[0]) void open(triggers[0],{fromUrl:true,instant:true});
