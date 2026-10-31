@@ -47,12 +47,7 @@ markActiveSection(window.location.hash || '#home');
     'open-imprint': {
       title: 'Imprint',
       subtitle: 'Information pursuant to Section 18 (1) of the German Interstate Media Treaty (MStV)',
-      sections: [
-        {heading: 'Responsible for this website', body: 'Sascha Bärtschi\nHans-Thoma-Straße 6\n14467 Potsdam\nGermany'},
-        {heading: 'GitHub', body: 'github.com/irwitzer', subsections: [
-          {heading: 'About this project', body: 'BookStitch is a private, non-commercial open-source project. The software is provided free of charge and is licensed under the GNU General Public License, Version 3 (GPL-3.0).'}
-        ]}
-      ],
+      sections: [],
       note: ''
     },
     'open-formats-book': {"title": "Formats", "subtitle": "From audio files to CDs, bring your sources together.", "sections": [{"heading": "Supported Input Formats", "blocks": [{"text": "BookStitch supports the following audio sources and formats:"}, {"label": "Sources:", "text": "Local files and folders · Audio CDs · MP3 CDs · Data CDs"}, {"label": "Audio:", "text": "MP3 · M4A · M4B · AAC · WAV · FLAC · OGG · OGA · Opus · WMA (Legacy)"}, {"heading": "Supported Input Chapter Formats"}, {"text": "Reads embedded chapters from supported audio files:"}, {"list": [{"strong": "MP4 / QuickTime", "text": " chapters (M4A, M4B)"}, {"strong": "Nero", "text": " chapters (M4A, M4B)"}, {"strong": "ID3v2 CHAP / CTOC", "text": " chapters (MP3)"}, {"strong": "FLAC", "text": " embedded chapters"}, {"strong": "OGG / OGA / Opus", "text": " embedded chapters"}, {"strong": "Automatic chapter creation", "text": " from individual audio files, including titles and filenames"}]}]}, {"heading": "Supported Output Formats", "blocks": [{"text": "Export your audiobook as AAC audio in an M4A or M4B container, with flexible quality presets."}, {"label": "Output:", "text": "M4A · M4B (AAC)"}, {"label": "Presets:", "text": "64 kbps (Mono) · 96 kbps (Mono) · 96 · 128 · 160 · 192 · 256 kbps"}, {"heading": "Supported Output Chapter Formats"}, {"list": [{"strong": "MP4 / QuickTime", "text": " embedded chapters (M4A, M4B)"}, {"text": "Chapter titles and precise timestamps"}]}]}], "note": ""},
@@ -196,7 +191,6 @@ markActiveSection(window.location.hash || '#home');
         } else {
           paragraph.appendChild(document.createTextNode(paragraphText));
         }
-        if (triggerId === 'open-imprint' && index === 0) paragraph.classList.add('imprint-address');
         container.appendChild(paragraph);
         }
       }
@@ -206,21 +200,11 @@ markActiveSection(window.location.hash || '#home');
       if (sampleLinkColumn[triggerId] === index) {
         const sampleLink = document.createElement('a');
         sampleLink.href = '#download-samples';
+      sampleLink.dataset.statEvent = 'samples.open';
         sampleLink.className = 'book-sample-shortcut';
         sampleLink.textContent = 'Download BookStitch Sample Audiobook';
         sampleLink.setAttribute('aria-label', 'Open Download Samples');
         container.appendChild(sampleLink);
-      }
-      if (triggerId === 'open-imprint' && index === 1) {
-        const githubParagraph = container.querySelector('p');
-        if (githubParagraph) {
-          const link = document.createElement('a');
-          link.href = 'https://github.com/irwitzer';
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-          link.textContent = 'https://github.com/irwitzer';
-          githubParagraph.replaceChildren(link);
-        }
       }
       // Optional additional headings and paragraphs for longer detail panels.
       for (const part of section.subsections || []) {
@@ -304,6 +288,7 @@ markActiveSection(window.location.hash || '#home');
       sampleCallout.className = 'player-samples-callout';
       const sampleLink = document.createElement('a');
       sampleLink.href = '#download-samples';
+      sampleLink.dataset.statEvent = 'samples.open';
       sampleLink.className = 'player-samples-link gramophone-guide-trigger';
       sampleLink.setAttribute('aria-label', 'Open Download Samples: Alice in Wonderland and Sherlock Holmes');
       const gramophone = document.createElement('img');
@@ -326,6 +311,7 @@ markActiveSection(window.location.hash || '#home');
       explanation.textContent = 'Check whether your favorite player supports audiobook chapters.';
       const sampleLink = document.createElement('a');
       sampleLink.href = '#download-samples';
+      sampleLink.dataset.statEvent = 'samples.open';
       sampleLink.className = 'book-sample-shortcut';
       sampleLink.textContent = 'Download BookStitch Sample Audiobook';
       sampleLink.setAttribute('aria-label', 'Open Download Samples');
@@ -339,11 +325,16 @@ markActiveSection(window.location.hash || '#home');
       explanation.textContent = 'Check whether your favorite player supports metadata and cover art.';
       const sampleLink = document.createElement('a');
       sampleLink.href = '#download-samples';
+      sampleLink.dataset.statEvent = 'samples.open';
       sampleLink.className = 'book-sample-shortcut';
       sampleLink.textContent = 'Download BookStitch Sample Audiobook';
       sampleLink.setAttribute('aria-label', 'Open Download Samples');
       invitation.append(explanation, sampleLink);
       noteNode.replaceChildren(invitation);
+    } else if (triggerId === 'open-imprint') {
+      // Native semantic HTML holds the legal copy and the responsive two-column layout.
+      const template = document.getElementById('imprint-privacy-template');
+      noteNode.replaceChildren(template.content.cloneNode(true));
     } else if (triggerId === 'open-shadow-projector') {
       // Reserved for future content. Keep the Shadow Projector clickable.
       columnSections.forEach(section => section.replaceChildren());
@@ -585,11 +576,12 @@ markActiveSection(window.location.hash || '#home');
   const aliceLinks = document.createElement('div');
   aliceLinks.className = 'sample-download-actions';
   [
-    ['Download Audiobook (M4A)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Lewis.Carroll.-.Alice.s.Adventures.in.Wonderland.m4a'],
-    ['Download Full Metadata Reference (TXT)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Lewis.Carroll.-.Alice.s.Adventures.in.Wonderland.Metadata-Reference.txt']
-  ].forEach(([label, url]) => {
+    ['Download Audiobook (M4A)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Lewis.Carroll.-.Alice.s.Adventures.in.Wonderland.m4a', 'samples.alice.audio'],
+    ['Download Full Metadata Reference (TXT)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Lewis.Carroll.-.Alice.s.Adventures.in.Wonderland.Metadata-Reference.txt', 'samples.alice.metadata']
+  ].forEach(([label, url, statId]) => {
     const link = document.createElement('a');
     link.className = 'sample-download-link';
+    link.dataset.statEvent = statId;
     link.href = url;
     link.textContent = label;
     link.target = '_blank';
@@ -639,11 +631,12 @@ markActiveSection(window.location.hash || '#home');
   const links = document.createElement('div');
   links.className = 'sample-download-actions';
   [
-    ['Download Audiobook (M4B)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Arthur.Conan.Doyle.-.The.Adventures.of.Sherlock.Holmes.m4b'],
-    ['Download Full Metadata Reference (TXT)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Arthur.Conan.Doyle.-.The.Adventures.of.Sherlock.Holmes.Metadata-Reference.txt']
-  ].forEach(([label, url]) => {
+    ['Download Audiobook (M4B)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Arthur.Conan.Doyle.-.The.Adventures.of.Sherlock.Holmes.m4b', 'samples.sherlock.audio'],
+    ['Download Full Metadata Reference (TXT)', 'https://github.com/irwitzer/BookStitch-Samples/releases/download/samples-v1/Arthur.Conan.Doyle.-.The.Adventures.of.Sherlock.Holmes.Metadata-Reference.txt', 'samples.sherlock.metadata']
+  ].forEach(([label, url, statId]) => {
     const link = document.createElement('a');
     link.className = 'sample-download-link';
+    link.dataset.statEvent = statId;
     link.href = url;
     link.textContent = label;
     link.target = '_blank';

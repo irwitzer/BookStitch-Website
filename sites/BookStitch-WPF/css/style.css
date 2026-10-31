@@ -2006,3 +2006,89 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;mar
 .lantern-grid .lantern-trigger * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* V2.29 — Imprint / Privacy: three cohesive sections within the existing book dialog. */
+#book-dialog.is-imprint-detail .book-panel-columns {display:none;}
+#book-dialog.is-imprint-detail .book-panel-note {
+  font:normal 14px/1.68 Inter,system-ui,sans-serif;
+  color:#dce9e6;
+  text-align:left;
+  margin:0;
+}
+#book-dialog.is-imprint-detail .book-panel-subtitle {margin-bottom:22px;}
+#book-dialog.is-imprint-detail .imprint-privacy-document {width:100%;}
+#book-dialog.is-imprint-detail .imprint-columns {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(22px,3.8vw,44px);
+  row-gap:24px;
+  padding:21px 0 1px;
+}
+#book-dialog.is-imprint-detail .imprint-intro-columns {
+  border-top:1px solid rgba(202,161,94,.34);
+  padding-top:24px;
+}
+#book-dialog.is-imprint-detail .imprint-columns section {min-width:0;}
+#book-dialog.is-imprint-detail .imprint-columns h4 {
+  font:500 clamp(17px,1.8vw,20px)/1.35 Cinzel,Georgia,serif;
+  color:#e4c592;
+  margin:0 0 15px;
+}
+#book-dialog.is-imprint-detail .imprint-columns h5 {
+  font:600 14px/1.45 Inter,system-ui,sans-serif;
+  color:#e4ca9f;
+  margin:20px 0 7px;
+}
+#book-dialog.is-imprint-detail .imprint-columns h5:first-of-type {margin-top:8px;}
+#book-dialog.is-imprint-detail .imprint-columns p {margin:0 0 13px;}
+#book-dialog.is-imprint-detail .imprint-columns strong {color:#f1d8a7;font-weight:650;}
+#book-dialog.is-imprint-detail .imprint-columns address {
+  font:normal 14px/1.85 Inter,system-ui,sans-serif;
+  white-space:pre-line;
+  margin:0;
+}
+#book-dialog.is-imprint-detail .imprint-wide-heading {
+  border-top:1px solid rgba(214,177,103,.48);
+  text-align:center;
+  margin:31px auto 6px;
+  padding:23px 8px 2px;
+}
+#book-dialog.is-imprint-detail .imprint-heading-ornament {
+  display:block;
+  font:18px/1 Georgia,serif;
+  color:#d9b779;
+  margin-bottom:9px;
+}
+#book-dialog.is-imprint-detail .imprint-wide-heading h3 {
+  font:500 clamp(24px,3vw,32px)/1.25 Cinzel,Georgia,serif;
+  color:#f0d1a0;
+  margin:0;
+}
+#book-dialog.is-imprint-detail .imprint-wide-heading p {
+  font:italic 500 clamp(18px,2.25vw,23px)/1.35 'Cormorant Garamond',Georgia,serif;
+  color:#79d2d5;
+  margin:9px 0 0;
+}
+#book-dialog.is-imprint-detail .imprint-columns ul {
+  margin:1px 0 15px;
+  padding-left:22px;
+}
+#book-dialog.is-imprint-detail .imprint-columns li {margin-bottom:6px;}
+#book-dialog.is-imprint-detail .imprint-columns a {
+  color:#8ad5d9;
+  text-decoration:underline;
+  text-decoration-color:rgba(138,213,217,.6);
+  text-underline-offset:3px;
+  overflow-wrap:anywhere;
+}
+#book-dialog.is-imprint-detail .imprint-columns a:hover,
+#book-dialog.is-imprint-detail .imprint-columns a:focus-visible {color:#d9fbfc;}
+#book-dialog.is-imprint-detail .imprint-links-lead {color:#e4ca9f;margin-bottom:7px;}
+@media(max-width:650px) {
+  #book-dialog.is-imprint-detail .imprint-columns {
+    grid-template-columns:minmax(0,1fr);
+    row-gap:12px;
+    padding-top:18px;
+  }
+  #book-dialog.is-imprint-detail .imprint-wide-heading {margin-top:27px;padding-top:20px;}
+}
