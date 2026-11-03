@@ -447,6 +447,11 @@ markActiveSection(window.location.hash || '#home');
     setPanelCopy(trigger.id);
     const detailScroller = panel.querySelector('.book-panel-scroll');
     detailScroller.scrollTop = 0;
+    // The detail image is shared by all feature books and both detail lanterns.
+    // Its initial HTML srcset belongs to the first book and would otherwise
+    // override the image.src chosen here after the flight animation.
+    image.removeAttribute('srcset');
+    image.removeAttribute('sizes');
     image.src = bookSrc;
     image.alt = '';
     dialog.hidden = false;
@@ -516,9 +521,14 @@ markActiveSection(window.location.hash || '#home');
   guideDialog.classList.add('is-lantern-detail');
   guideDialog.querySelector('#book-dialog-title').id = 'gramophone-dialog-title';
   guideDialog.querySelector('.book-dialog-close').setAttribute('aria-label', 'Return to Player Compatibility Guide');
-  guideDialog.querySelector('.book-animation-frame').src = 'assets/gramophone-compatibility-v72.webp';
-  guideDialog.querySelector('.book-animation-frame').setAttribute('width', '1180');
-  guideDialog.querySelector('.book-animation-frame').setAttribute('height', '1333');
+  // The dialog is cloned from the feature-book template. Its first-book srcset
+  // must not override the gramophone src after the zoom finishes.
+  const gramophoneFrame = guideDialog.querySelector('.book-animation-frame');
+  gramophoneFrame.removeAttribute('srcset');
+  gramophoneFrame.removeAttribute('sizes');
+  gramophoneFrame.src = 'assets/gramophone-compatibility-v72.webp';
+  gramophoneFrame.setAttribute('width', '1180');
+  gramophoneFrame.setAttribute('height', '1333');
   guideDialog.querySelector('#gramophone-dialog-title').textContent = 'Download Samples';
   guideDialog.querySelector('.book-panel-subtitle').textContent = 'Experience BookStitch in your favorite player.';
 
@@ -787,13 +797,23 @@ markActiveSection(window.location.hash || '#home');
   const dialog=document.querySelector('#gallery-dialog');
   if(!triggers.length||!dialog)return;
   const slides=[
-    {title:'Main Window — Sherlock Holmes',desc:'Sherlock Holmes audiobook prepared in BookStitch.',src:'assets/screenshot-01-v86.webp',alt:'Sherlock Holmes audiobook prepared in BookStitch.',width:1251,height:861},
-    {title:'Metadata — Sherlock Holmes',desc:'Sherlock Holmes multi-value metadata in the editor.',src:'assets/screenshot-02-v86.webp',alt:'Sherlock Holmes multi-value metadata in the editor.',width:1252,height:860},
-    {title:'Drive Circle Settings',desc:'Drive Circle settings with connected optical drives.',src:'assets/screenshot-03-v86.webp',alt:'Drive Circle settings with connected optical drives.',width:1254,height:862},
-    {title:'Project Library — Alice in Wonderland',desc:'Resume or manage the Alice in Wonderland audiobook project.',src:'assets/screenshot-04-v86.webp',alt:'Resume or manage the Alice in Wonderland audiobook project.',width:1252,height:864},
-    {title:'Application Information',desc:'BookStitch application information in the light theme.',src:'assets/screenshot-05-v86.webp',alt:'BookStitch application information in the light theme.',width:1247,height:860},
-    {title:'Main Window — Alice in Wonderland',desc:'Alice in Wonderland audiobook with twelve tracks.',src:'assets/screenshot-06-v86.webp',alt:'Alice in Wonderland audiobook with twelve tracks.',width:1251,height:862},
-    {title:'Compatibility Metadata — Alice in Wonderland',desc:'Alice in Wonderland compatibility metadata settings.',src:'assets/screenshot-07-v86.webp',alt:'Alice in Wonderland compatibility metadata settings.',width:1250,height:859}
+    {title:'Audiobook Workspace',desc:'BookStitch audiobook workspace with track list and cover artwork.',src:'assets/screenshot-01-workspace-v235b.webp',alt:'BookStitch main workspace showing The Clockmaker of Ash Harbor with 536 audio files and chapter proposals.',width:1410,height:940},
+    {title:'Chapter Configuration and Preview',desc:'Chapter configuration and preview in the Metadata window.',src:'assets/02-Chapter-Configuration-and-Preview.webp',alt:'Chapter configuration and preview in the Metadata window.',width:1410,height:940},
+    {title:'Rich Metadata and Cover Art',desc:'Metadata editor with multiple contributors, genres and cover artwork.',src:'assets/03-Rich-Metadata-and-Cover-Art.webp',alt:'Metadata editor with multiple contributors, genres and cover artwork.',width:1410,height:940},
+    {title:'Export and Chapter Settings',desc:'Export format selection and customizable chapter settings.',src:'assets/04-Export-and-Chapter-Settings.webp',alt:'Export format selection and customizable chapter settings.',width:1410,height:940},
+    {title:'MP3 CD Import',desc:'An MP3 CD being imported into a BookStitch audiobook project.',src:'assets/05-MP3-CD-Import.webp',alt:'An MP3 CD being imported into a BookStitch audiobook project.',width:1410,height:940},
+    {title:'Drive Circle Multi-Disc Management',desc:'Drive Circle managing multiple CDs during audiobook import.',src:'assets/06-Drive-Circle-Multi-Disc-Management.webp',alt:'Drive Circle managing multiple CDs during audiobook import.',width:1410,height:940},
+    {title:'Save and Resume Projects',desc:'Previously saved audiobook projects ready to resume.',src:'assets/07-Save-and-Resume-Projects.webp',alt:'Previously saved audiobook projects ready to resume.',width:1410,height:940},
+    {title:'Track Management and Validation',desc:'Audio track list with chapter warnings and missing-source validation.',src:'assets/08-Track-Management-and-Validation.webp',alt:'Audio track list with chapter warnings and missing-source validation.',width:1410,height:940},
+    {title:'Project Preparation',desc:'Prepare a new audiobook project with source files and metadata.',src:'assets/09-Project-Preparation.webp',alt:'Prepare a new audiobook project with source files and metadata.',width:1410,height:940},
+    {title:'AAC Pass-Through',desc:'AAC pass-through confirmation for compatible audio files.',src:'assets/10-AAC-Pass-Through.webp',alt:'AAC pass-through confirmation for compatible audio files.',width:1410,height:940},
+    {title:'Settings — General',desc:'General settings for export, colors, sounds and windows.',src:'assets/screenshot-11-settings-01-v236b.webp',alt:'BookStitch settings — general screen.',width:1410,height:940},
+    {title:'Settings — Conversion',desc:'AAC export presets, sample rate and pass-through settings.',src:'assets/screenshot-12-settings-02-v236b.webp',alt:'BookStitch settings — conversion screen.',width:1410,height:940},
+    {title:'Settings — Metadata',desc:'File naming, genre lists and cover image options.',src:'assets/screenshot-13-settings-03-v236b.webp',alt:'BookStitch settings — metadata screen.',width:1410,height:940},
+    {title:'Settings — Chapters',desc:'Chapter editor and chapter numbering settings, shown in the light theme.',src:'assets/screenshot-14-settings-04-v236b.webp',alt:'BookStitch settings — chapters screen.',width:1410,height:940},
+    {title:'Settings — Project Management',desc:'Project retention, project management and integrity settings.',src:'assets/screenshot-15-settings-05-v236b.webp',alt:'BookStitch settings — project management screen.',width:1410,height:940},
+    {title:'Settings — Drives',desc:'Drive Circle and connected optical drives.',src:'assets/screenshot-16-settings-06-v236b.webp',alt:'BookStitch settings — drives screen.',width:1410,height:940},
+    {title:'Settings — Info',desc:'BookStitch application information and open-source project links.',src:'assets/screenshot-17-settings-07-v236b.webp',alt:'BookStitch settings — info screen.',width:1410,height:940}
   ];
   let index=0,previousFocus=null,startX=null,flight=null,ghost=null,flightId=0,activeSource=null;
   const title=dialog.querySelector('#gallery-slide-title'),desc=dialog.querySelector('#gallery-slide-desc');
@@ -812,13 +832,12 @@ markActiveSection(window.location.hash || '#home');
   }
   while(dots.length>slides.length)dots.pop().remove();
   dotBar.classList.toggle('gallery-dots-long',slides.length>10);
+  dialog.classList.toggle('gallery-single-slide',slides.length===1);
 
-  // Existing 640/960px screenshot variants are reused for responsive preloading.
+  // The 1410 × 940 screenshots are already WebP; use each unchanged original.
   const responsiveSizes='(max-width: 620px) calc(100vw - 24px), (max-width: 1024px) calc(100vw - 60px), min(90vw, 1250px)';
-  const variants=slide=>{
-    const stem=slide.src.replace(/\.webp$/,'');
-    return `${stem}-640.webp 640w, ${stem}-960.webp 960w, ${slide.src} ${slide.width}w`;
-  };
+  // No extra thumbnail variants: preserve the exact uploaded screenshot files.
+  const variants=slide=>`${slide.src} ${slide.width}w`;
 
   // Warm every screenshot gradually after window.load, not during the critical
   // render. Only one low-priority request at a time, separated by idle time.
@@ -910,6 +929,33 @@ markActiveSection(window.location.hash || '#home');
   };
   if(document.readyState==='complete')beginWarm();
   else window.addEventListener('load',beginWarm,{once:true});
+  // V2.35c: Land the Magic Lantern against the actual screenshot top,
+  // mirroring the small overlap of the Antique Projector/Shadow Lantern.
+  // This affects only the Magic Lantern. The screenshot remains in its
+  // existing responsive layout and stays hidden until the flight finishes.
+  const galleryProjector=dialog.querySelector('.gallery-projector');
+  function positionMagicLantern(){
+    if(dialog.hidden)return;
+    // Reset first so repeated resizes never accumulate the previous offset.
+    galleryProjector.style.setProperty('--magic-lantern-shift','0px');
+    const screen=screenshot.getBoundingClientRect();
+    const projector=galleryProjector.getBoundingClientRect();
+    if(!screen.width || !screen.height || !projector.height)return;
+    // object-fit:contain can letterbox screenshots in short landscape views.
+    // Account for that instead of attaching to an empty image-box margin.
+    const slide=slides[index];
+    const visibleHeight=Math.min(screen.height,screen.width*slide.height/slide.width);
+    const screenshotTop=screen.top+(screen.height-visibleHeight)/2;
+    const overlap=Math.min(14,Math.max(5,projector.height*.11));
+    const shift=screenshotTop+overlap-projector.bottom;
+    galleryProjector.style.setProperty('--magic-lantern-shift',`${Math.round(shift)}px`);
+  }
+  window.addEventListener('resize',()=>{
+    if(!dialog.hidden && !opening)requestAnimationFrame(positionMagicLantern);
+  },{passive:true});
+  screenshot.addEventListener('load',()=>{
+    if(!dialog.hidden && !opening)requestAnimationFrame(positionMagicLantern);
+  });
   function render(){
     const slide=slides[index];
     title.textContent=slide.title;
@@ -953,6 +999,8 @@ markActiveSection(window.location.hash || '#home');
     const token=++flightId;
     const landing=dialog.querySelector('.gallery-projector img');
     landing.src=activeSource.currentSrc||activeSource.src;
+    // Calculate the destination before creating the flying Magic Lantern.
+    positionMagicLantern();
     if(!options.instant && !reducedMotion.matches && sourceRect.width && sourceRect.height){
       const destination=landing.getBoundingClientRect();
       ghost=document.createElement('img');
@@ -981,14 +1029,92 @@ markActiveSection(window.location.hash || '#home');
     dialog.querySelector('.gallery-close').focus();
     scheduleWarm(550);
   }
-  function close(options={}){if(!options.keepHash && location.hash === '#magic-lantern') history.replaceState(null,'','#magic');cancelFlight();opening=false;dialog.classList.remove('gallery-landed');dialog.hidden=true;dialog.setAttribute('aria-hidden','true');document.body.classList.remove('book-dialog-visible');previousFocus?.focus();activeSource=null;scheduleWarm(750);}
-  function move(amount){index=(index+amount+slides.length)%slides.length;render();}
+  let slideSwitchId=0,slideMotion=null;
+  function cancelSlideSwitch(){
+    slideSwitchId++;
+    if(slideMotion){slideMotion.cancel();slideMotion=null;}
+    screenshot.style.opacity='';
+  }
+  function close(options={}){if(!options.keepHash && location.hash === '#magic-lantern') history.replaceState(null,'','#magic');cancelSlideSwitch();cancelFlight();opening=false;dialog.classList.remove('gallery-landed');dialog.hidden=true;dialog.setAttribute('aria-hidden','true');document.body.classList.remove('book-dialog-visible');previousFocus?.focus({preventScroll:true});activeSource=null;scheduleWarm(750);}
+  async function showSlide(next,direction){
+    if(dialog.hidden||opening||slides.length<2)return;
+    if(next===index)return;
+    // Cancel any previous transition, including a pending image decode.
+    cancelSlideSwitch();
+    const token=slideSwitchId;
+    if(reducedMotion.matches){index=next;render();return;}
+    const offset=direction<0?-12:12;
+    slideMotion=screenshot.animate([
+      {opacity:1,transform:'translateX(0px)'},
+      {opacity:0,transform:`translateX(${-offset}px)`}
+    ],{duration:125,easing:'ease-in',fill:'forwards'});
+    try{await slideMotion.finished;}catch(_){return;}
+    if(token!==slideSwitchId)return;
+    screenshot.style.opacity='0';
+    slideMotion.cancel();slideMotion=null;
+    index=next;render();
+    // Avoid flashing a not-yet-decoded image on a cold gallery navigation.
+    try{await screenshot.decode();}catch(_){}
+    if(token!==slideSwitchId||dialog.hidden)return;
+    slideMotion=screenshot.animate([
+      {opacity:0,transform:`translateX(${offset}px)`},
+      {opacity:1,transform:'translateX(0px)'}
+    ],{duration:190,easing:'ease-out'});
+    screenshot.style.opacity='';
+    try{await slideMotion.finished;}catch(_){return;}
+    if(token===slideSwitchId)slideMotion=null;
+  }
+  function move(amount){void showSlide((index+amount+slides.length)%slides.length,amount);}
   triggers.forEach(trigger=>{
     trigger.addEventListener('click',()=>open(trigger));
     // A visitor hovering/focusing the lantern may want the gallery next;
     // prioritize its first screenshot without starting before window.load.
     trigger.addEventListener('pointerenter',()=>scheduleWarm(20));
     trigger.addEventListener('focus',()=>scheduleWarm(20));
+  });
+  // V2.36a: The Gallery menu is a guided entrance, not an instant deep link.
+  // Scroll only when the Magic Lantern is outside the visible viewport; then
+  // perform the very same click animation as the lantern itself.
+  const galleryNavLink=navigation?.querySelector('a[href="#magic-lantern"]');
+  let galleryNavSerial=0;
+  async function openGalleryFromNavigation(){
+    if(!dialog.hidden)return;
+    const source=triggers[0];
+    const visual=source?.querySelector('.lantern-visual');
+    if(!source||!visual)return;
+    const request=++galleryNavSerial;
+    const header=document.querySelector('.site-header');
+    const headerBottom=header?.getBoundingClientRect().bottom||0;
+    const bounds=visual.getBoundingClientRect();
+    const roomTop=headerBottom+10;
+    const roomBottom=window.innerHeight-10;
+    const fits=bounds.top>=roomTop && bounds.bottom<=roomBottom;
+    if(!fits){
+      const available=Math.max(1,window.innerHeight-headerBottom);
+      // Center the actual lantern graphic in the unobstructed viewport.
+      const targetTop=window.scrollY+bounds.top-headerBottom-(available-bounds.height)/2;
+      const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+      const destination=Math.max(0,Math.min(maxScroll,targetTop));
+      window.scrollTo({top:destination,behavior:reducedMotion.matches?'instant':'smooth'});
+      // Await the scroll's destination, rather than using a fixed delay that
+      // could open the dialog before a long scroll finishes.
+      const started=performance.now();
+      await new Promise(resolve=>{
+        function check(){
+          if(request!==galleryNavSerial||!dialog.hidden){resolve();return;}
+          if(Math.abs(window.scrollY-destination)<=3 || performance.now()-started>3000){
+            requestAnimationFrame(resolve);
+          } else requestAnimationFrame(check);
+        }
+        requestAnimationFrame(check);
+      });
+    }
+    if(request!==galleryNavSerial||!dialog.hidden)return;
+    await open(source);
+  }
+  galleryNavLink?.addEventListener('click',event=>{
+    event.preventDefault();
+    void openGalleryFromNavigation();
   });
   function syncGalleryHash(){
     if(location.hash === '#magic-lantern'){
@@ -1001,7 +1127,7 @@ markActiveSection(window.location.hash || '#home');
   dialog.querySelectorAll('[data-gallery-close]').forEach(el=>el.addEventListener('click',close));
   dialog.querySelector('#gallery-prev').addEventListener('click',()=>move(-1));
   dialog.querySelector('#gallery-next').addEventListener('click',()=>move(1));
-  dots.forEach(d=>d.addEventListener('click',()=>{index=Number(d.dataset.galleryIndex);render();}));
+  dots.forEach(d=>d.addEventListener('click',()=>{const next=Number(d.dataset.galleryIndex);void showSlide(next,next>=index?1:-1);}));
   document.addEventListener('keydown',e=>{if(dialog.hidden)return;if(e.key==='Escape'){e.preventDefault();close();}else if(e.key==='ArrowRight'){e.preventDefault();move(1);}else if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}else if(e.key==='Tab'){const els=[...dialog.querySelectorAll('button')];const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
   const screen=dialog.querySelector('.gallery-screen-frame');
   screen.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX;},{passive:true});

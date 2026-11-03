@@ -2104,3 +2104,63 @@ body > .trust-popover.trust-floating-v68 .swiss-cross-inline{margin-left:6px;mar
 /* Keep 20+ gallery indicators usable without changing the seven-slide layout. */
 .gallery-dots.gallery-dots-long{max-width:min(78vw,480px);overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:thin;overscroll-behavior-inline:contain}
 .gallery-dots.gallery-dots-long button{flex:0 0 auto}
+
+/* V2.35b: show the first screenshot only after the Magic Lantern flight has landed. */
+.gallery-dialog:not(.gallery-landed) .gallery-theatre,
+.gallery-dialog:not(.gallery-landed) .gallery-foot,
+.gallery-dialog:not(.gallery-landed) .gallery-dots {
+  opacity:0;
+  visibility:hidden;
+}
+.gallery-dialog.gallery-landed .gallery-theatre {
+  opacity:1;
+  visibility:visible;
+  transition:opacity 560ms ease-out;
+}
+.gallery-dialog.gallery-single-slide .gallery-foot,
+.gallery-dialog.gallery-single-slide .gallery-dots {display:none!important;}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-dialog.gallery-landed .gallery-theatre {transition:none;}
+}
+
+/* V2.35c: the Magic Lantern lightly overlaps the first screenshot.
+   Only its target position changes; the other two lanterns are untouched. */
+#gallery-dialog .gallery-shell > .gallery-projector {
+  transform:translateY(var(--magic-lantern-shift, 5px));
+}
+
+
+/* V2.36c — replace the footer imprint star with the candle emblem and keep a gentle overlap during the zoom. */
+/* V2.36d — reduce optical footer spacing around the transparent candle art. */
+.footer-imprint-trigger:has(.footer-candle-wrap){gap:2px}
+.footer-star-wrap.footer-candle-wrap{width:30px;height:30px;margin-inline:-3px;transform:translateY(-2px);overflow:visible;flex:none}
+.footer-star-wrap.footer-candle-wrap img{width:100%;height:100%;object-fit:contain;display:block}
+.footer-imprint-trigger:hover .footer-star-wrap.footer-candle-wrap,.footer-imprint-trigger:focus-visible .footer-star-wrap.footer-candle-wrap{transform:translateY(-2px) scale(1.14);filter:drop-shadow(0 0 6px rgba(63,200,201,.55))}
+/* Transparent lower padding is part of the original WebP. Move only the
+   imprint artwork down to put the visible candle foot onto the panel rim. */
+.book-dialog.is-imprint-detail .book-animation{width:min(calc(var(--detail-book-size,255px) * .95),250px);height:min(calc(var(--detail-book-size,255px) * 1.18),290px);margin-bottom:-20px;transform:translateY(46px)}
+.book-dialog.is-imprint-detail .book-animation-frame{object-fit:contain}
+@media(max-width:600px){.footer-star-wrap.footer-candle-wrap{width:28px;height:28px}.book-dialog.is-imprint-detail .book-animation{margin-top:5px;margin-bottom:-16px;transform:translateY(38px)}}
+
+
+/* V2.39: Hide only the horizontal indicator scrollbar of the gallery dots.
+   Dot scrolling and touch swipes remain available. */
+.gallery-dots.gallery-dots-long {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gallery-dots.gallery-dots-long::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* V2.39: Avoid the temporary colored tap rectangle on mobile
+   for feature books and the footer's Imprint / Privacy candle trigger.
+   Existing keyboard focus-visible indication is intentionally preserved. */
+.workflow .book-trigger,
+.workflow .book-trigger *,
+.footer-imprint-trigger,
+.footer-imprint-trigger * {
+  -webkit-tap-highlight-color: transparent;
+}
